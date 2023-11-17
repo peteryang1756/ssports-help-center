@@ -1,10 +1,10 @@
 {
     "index_name": "help",
     "start_urls": [
-      "https://help.ssangyongsports.org/"
+      "/"
     ],
     "sitemap_urls": [
-      "https://help.ssangyongsports.org/sitemap.xml"
+      "/sitemap.xml"
     ],
     "sitemap_alternate_links": true,
     "stop_urls": [],
