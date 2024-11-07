@@ -51,7 +51,7 @@ const config = {
         
         logo: {
           alt: '雙龍體育 Logo',
-          src: 'https://img.ssangyongsports.eu.org/logo2.png',
+          src: 'https://cdn.ssangyongsports.eu.org/image/https://ssangyongsports.eu.org/supportlogo.png',
           href: '/support', // 修正結尾引號
           className: 'custom-navbar-logo-class',
         },
@@ -81,7 +81,7 @@ const config = {
         style: 'dark',
         logo: {
           alt: '雙龍體育',
-          src: 'https://img.ssangyongsports.eu.org/logo2.png',
+          src: 'https://cdn.ssangyongsports.eu.org/image/https://ssangyongsports.eu.org/supportlogo.png',
           href: '/support',
           width: 160,
           height: 51,
