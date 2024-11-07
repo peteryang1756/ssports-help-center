@@ -103,7 +103,7 @@ function Features() {
         <section className={clsx("home-container", styles.features)}>
           <div className={clsx("row margin-horiz--lg")}>
             <div className={clsx("col col--2")}>
-              <h3 className="container-h3">Explore content</h3>
+              <h3 className="container-h3">瀏覽所有類別</h3>
             </div>
             <div className={clsx("col col--10")}>
               <div className={clsx("row")}>
