@@ -1,35 +1,33 @@
+import React, { useEffect } from 'react';
 
-import React from 'react';
-
-class ChatwootWidget extends React.Component {
-  componentDidMount () {
-    // Add Chatwoot Settings
-    window.chatwootSettings = {
-      hideMessageBubble: false,
-      position: 'right', // This can be left or right
-      locale: 'zh-tw', // Language to be set
-      type: 'standard', // [standard, expanded_bubble]
-    };
-
-    // Paste the script from inbox settings except the <script> tag
-    (function(d,t) {
-      var BASE_URL="https://app.chatwoot.com";
-      var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-      g.src=BASE_URL+"/packs/js/sdk.js";
-      s.parentNode.insertBefore(g,s);
-      g.async=!0;
-      g.onload=function(){
-        window.chatwootSDK.run({
-          websiteToken: 'GmfmZ9BcVVDgkKWTpjg1fYnS',
-          baseUrl: BASE_URL
-        })
+const ChatwootWidget = () => {
+  useEffect(() => {
+    // Define the Beacon function and load the script
+    (function (e, t, n) {
+      function a() {
+        var e = t.getElementsByTagName('script')[0],
+          n = t.createElement('script');
+        n.type = 'text/javascript';
+        n.async = true;
+        n.src = 'https://beacon-v2.helpscout.net';
+        e.parentNode.insertBefore(n, e);
       }
-    })(document,"script");
-  }
+      if (
+        (e.Beacon = n = function (t, n, a) {
+          e.Beacon.readyQueue.push({ method: t, options: n, data: a });
+        }),
+        (n.readyQueue = []),
+        'complete' === t.readyState
+      )
+        return a();
+      e.attachEvent ? e.attachEvent('onload', a) : e.addEventListener('load', a, false);
+    })(window, document, window.Beacon || function () {});
 
-  render () {
-    return null;
-  }
-}
+    // Initialize the Beacon
+    window.Beacon('init', '86a7ac14-638e-42d4-9506-362c84380956');
+  }, []);
 
-export default ChatwootWidget
+  return null; // This component doesn't render anything to the UI
+};
+
+export default ChatwootWidget;
