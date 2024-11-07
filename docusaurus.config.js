@@ -7,8 +7,8 @@ const lightCodeTheme = require('prism-react-renderer/themes/github');
 const config = {
   title: '雙龍體育支援中心',
   tagline: '雙龍體育支援中心',
-  url: 'https://www.ssangyongsports.eu.org/',
-  baseUrl: '/',
+  url: 'https://www.ssangyongsports.eu.org/support',
+  baseUrl: '/support',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'https://i.imgur.com/CfQiMkp.png',
