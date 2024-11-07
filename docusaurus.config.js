@@ -8,7 +8,7 @@ const config = {
   title: '雙龍體育支援中心',
   tagline: '雙龍體育支援中心',
   url: 'https://www.ssangyongsports.eu.org/support',
-  baseUrl: '/support/',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'https://i.imgur.com/CfQiMkp.png',
