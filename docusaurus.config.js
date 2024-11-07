@@ -5,8 +5,8 @@ const lightCodeTheme = require('prism-react-renderer/themes/github');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '雙龍體育支援中心',
-  tagline: '雙龍體育支援中心',
+  title: '雙龍體育幫助',
+  tagline: '雙龍體育幫助中心',
   url: 'https://www.ssangyongsports.eu.org/support',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -52,7 +52,7 @@ const config = {
         logo: {
           alt: '雙龍體育 Logo',
           src: 'https://img.ssangyongsports.eu.org/logo2.png',
-          href: 'https://ssangyongsports.eu.org/support', // 修正結尾引號
+          href: '/support', // 修正結尾引號
           className: 'custom-navbar-logo-class',
         },
         items: [
@@ -82,7 +82,7 @@ const config = {
         logo: {
           alt: '雙龍體育',
           src: 'https://img.ssangyongsports.eu.org/logo2.png',
-          href: '/',
+          href: '/support',
           width: 160,
           height: 51,
         },
