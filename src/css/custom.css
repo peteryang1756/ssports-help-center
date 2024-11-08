@@ -434,3 +434,12 @@ html[data-theme="light"] .darkTheme {
 .pagination-nav {
   display: none;
 }
+/* 隱藏側邊欄 */
+.theme-doc-sidebar-container {
+  display: none;
+}
+
+/* 將主內容展開 */
+.theme-doc-main {
+  margin-left: 0;
+}
