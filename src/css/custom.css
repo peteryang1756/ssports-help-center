@@ -435,11 +435,16 @@ html[data-theme="light"] .darkTheme {
   display: none;
 }
 /* 隱藏側邊欄 */
+/* 隱藏側邊欄 */
 .theme-doc-sidebar-container {
-  display: none;
+    display: none;
 }
 
-/* 將主內容展開 */
+/* 擴展內容區域的寬度 */
+.main-wrapper {
+    margin-left: 0;
+}
+
 .theme-doc-main {
-  margin-left: 0;
+    max-width: 100%;
 }
