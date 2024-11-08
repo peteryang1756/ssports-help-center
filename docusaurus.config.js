@@ -63,6 +63,11 @@ const config = {
           },
         ],
       },
+      docs: {
+      sidebar: {
+        hideable: true,   // 允許側邊欄隱藏
+        autoCollapseCategories: true,  // 自動折疊
+      },
       algolia: {
         apiKey: "c2e792c2e75fe1dd3e40574f8b4c9a80",
         indexName: "help",
