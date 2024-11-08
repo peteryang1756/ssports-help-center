@@ -43,7 +43,7 @@ export default function DocItemContent({children}: Props): JSX.Element {
         </header>
       )}
       <MDXContent>{children}</MDXContent>
-        <DocsRating label={unversionedId} />
+        <DocsRating />
     </div>
   );
 }
