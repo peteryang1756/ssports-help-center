@@ -63,13 +63,6 @@ const config = {
           },
         ],
       },
-      announcementBar: {
-        id: 'announcementBar-2',
-        content: '新年快樂2023',
-        backgroundColor: '#84C1FF',
-        textColor: '#091E42',
-        isCloseable: false,
-      },
       algolia: {
         apiKey: "c2e792c2e75fe1dd3e40574f8b4c9a80",
         indexName: "help",
@@ -90,15 +83,15 @@ const config = {
           {
             title: '體育',
             items: [
-              { label: '雙龍職棒', href: 'https://slbtw.cf' },
-              { label: '雙龍職籃', href: 'https://sbatw.ml' },
-              { label: '雙龍足球', href: '/' },
+              { label: '雙龍職棒', href: 'https://slb.ssangyongsports.eu.org' },
+              { label: '雙龍職籃', href: 'https://sba.ssangyongsports.eu.org' },
+              { label: '雙龍足球', href: 'https://js.ssangyongsports.eu.org' },
             ],
           },
           {
             title: '組織',
             items: [
-              { label: 'blog', href: '/blog' },
+              { label: 'blog', href: 'https://ssangyongsports.eu.org/blog' },
               { label: '狀態', href: 'https://status.ssangyongsports.eu.org/' },
             ],
           },
@@ -106,12 +99,12 @@ const config = {
             title: '幫助',
             items: [
               { label: '幫助', href: 'https://help.ssangyongsports.eu.org/' },
-              { label: '社區', href: 'https://discuss.ssangyongsports.eu.org/' },
-              { label: '聯繫', href: 'https://ssangyongsports.eu.org/c' },
+              { label: '社區', href: 'https://forum.ssangyongsports.eu.org/' },
+              { label: '聯繫', href: 'https://ssangyongsports.eu.org/contact' },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} 雙龍體育, org. 維護團隊：雙龍體育.`,
+        copyright: `Copyright © ${new Date().getFullYear()} 雙龍體育保留一切權利。`,
       },
       prism: {
         theme: lightCodeTheme,
