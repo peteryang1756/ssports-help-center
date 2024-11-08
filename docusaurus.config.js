@@ -62,7 +62,6 @@ const config = {
       docs: {
         sidebar: {
           hideable: true, // 允許側邊欄隱藏
-          autoCollapseCategories: true, // 自動折疊
         },
       },
       algolia: {
