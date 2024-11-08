@@ -431,3 +431,6 @@ html[data-theme="light"] .darkTheme {
     margin-left: 0rem !important;
   }
 }
+.pagination-nav {
+  display: none;
+}
