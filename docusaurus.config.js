@@ -14,13 +14,10 @@ const config = {
   favicon: 'https://i.imgur.com/CfQiMkp.png',
 
   // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'ssangyongsportsorg', // Usually your GitHub org/user name.
-  projectName: 'ssport-site', // Usually your repo name.
+  organizationName: 'ssangyongsportsorg', // GitHub organization/user name
+  projectName: 'ssport-site', // Repository name
 
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
+  // Internationalization configuration
   i18n: {
     defaultLocale: 'zh-tw',
     locales: ['zh-tw'],
@@ -48,11 +45,10 @@ const config = {
     ({
       navbar: {
         hideOnScroll: true,
-        
         logo: {
           alt: '雙龍體育 Logo',
           src: 'https://cdn.ssangyongsports.eu.org/image/https://ssangyongsports.eu.org/supportlogo.png',
-          href: '/support', // 修正結尾引號
+          href: '/support',
           className: 'custom-navbar-logo-class',
         },
         items: [
@@ -64,9 +60,10 @@ const config = {
         ],
       },
       docs: {
-      sidebar: {
-        hideable: true,   // 允許側邊欄隱藏
-        autoCollapseCategories: true,  // 自動折疊
+        sidebar: {
+          hideable: true, // 允許側邊欄隱藏
+          autoCollapseCategories: true, // 自動折疊
+        },
       },
       algolia: {
         apiKey: "c2e792c2e75fe1dd3e40574f8b4c9a80",
