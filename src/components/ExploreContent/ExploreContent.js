@@ -7,7 +7,7 @@ import styles from "./styles.module.css";
 const firstDataRow = [
   {
     title: "文章撰寫中",
-    link: "/",
+    link: "/support",
     description: (
       <>
         文章撰寫中
@@ -16,7 +16,7 @@ const firstDataRow = [
   },
   {
     title: "文章撰寫中",
-    link: "/",
+    link: "/support",
     description: (
       <>
        文章撰寫中
@@ -25,7 +25,7 @@ const firstDataRow = [
   },
   {
     title: "聯繫",
-    link: "/",
+    link: "/docs/contact",
     icon: "/123.webp",
     description: (
       <>
@@ -38,7 +38,7 @@ const firstDataRow = [
 const secondDataRow = [
   {
     title: "文章撰寫中",
-    link: "/",
+    link: "/support",
     description: (
       <>
        文章撰寫中
@@ -47,7 +47,7 @@ const secondDataRow = [
   },
   {
     title: "文章撰寫中",
-    link: "/",
+    link: "/support",
     description: (
       <>
         文章撰寫中
@@ -56,7 +56,7 @@ const secondDataRow = [
   },
   {
     title: "文章撰寫中",
-    link: "/",
+    link: "/support",
     description: (
       <>
       文章撰寫中
@@ -86,7 +86,7 @@ function Feature({ title, link, icon, description }) {
             <p>{description}</p>
           </div>
           <img
-            alt="Download icon"
+            alt="尚無圖片"
             style={{ height: "70px", width: "70px" }}
             src={useBaseUrl(icon)}
           />
