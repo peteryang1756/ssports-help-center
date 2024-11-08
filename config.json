@@ -1,7 +1,7 @@
 {
     "index_name": "help",
     "start_urls": [
-      "https://ssports-site-git-main-ssangyongsportsorg.vercel.app/docs/intro"
+      "https://ssports-site-git-main-ssangyongsportsorg.vercel.app/docs"
     ],
     "sitemap_urls": [
       "https://ssports-site-git-main-ssangyongsportsorg.vercel.app/sitemap.xml"
