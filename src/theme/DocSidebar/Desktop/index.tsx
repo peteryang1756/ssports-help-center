@@ -16,7 +16,6 @@ function DocSidebarDesktop({ path, sidebar, onCollapse }: Props) {
     },
   } = useThemeConfig();
 
-  // State to manage the visibility of the sidebar
   const [isHidden, setIsHidden] = useState(true);
 
   const handleToggleSidebar = () => {
@@ -35,7 +34,7 @@ function DocSidebarDesktop({ path, sidebar, onCollapse }: Props) {
       )}
     >
       {hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
-      <Content path={path} sidebar={sidebar} />
+      {!isHidden && <Content path={path} sidebar={sidebar} />}
       {hideable && <CollapseButton onClick={handleToggleSidebar} />}
     </div>
   );
