@@ -6,8 +6,6 @@ import CollapseButton from '@theme/DocSidebar/Desktop/CollapseButton';
 import Content from '@theme/DocSidebar/Desktop/Content';
 import type {Props} from '@theme/DocSidebar/Desktop';
 
-import styles from './styles.module.css';
-
 function DocSidebarDesktop({path, sidebar, onCollapse}: Props) {
   const {
     navbar: {hideOnScroll},
