@@ -58,7 +58,9 @@ const config = {
       },
       docs: {
         sidebar: {
-          hideable: true, // 允許側邊欄隱藏
+       sidebarCollapsible: true,
+        sidebarCollapsed: false,
+        hideable: true,
         },
       },
       algolia: {
