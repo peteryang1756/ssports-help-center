@@ -452,3 +452,6 @@ div[class^='docSidebarContainer'] {
 .theme-doc-main {
     max-width: 100%;
 }
+.docSidebarContainer {
+  display: none;
+}
