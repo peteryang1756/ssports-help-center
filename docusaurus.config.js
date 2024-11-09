@@ -59,6 +59,7 @@ const config = {
       docs: {
         sidebar: {
         autoCollapseCategories: false,
+        hide: ture,
         },
       },
       algolia: {
