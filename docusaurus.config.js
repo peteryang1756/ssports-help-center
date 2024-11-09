@@ -71,7 +71,7 @@ const config = {
         searchParameters: {},
       },
       footer: {
-        style: 'dark',
+        style: 'light',
         logo: {
           alt: '雙龍體育',
           src: 'https://cdn.ssangyongsports.eu.org/image/https://ssangyongsports.eu.org/supportlogo.png',
