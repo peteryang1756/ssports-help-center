@@ -8,7 +8,7 @@ import type { Props } from '@theme/DocSidebar/Desktop';
 
 import styles from './styles.module.css';
 
-function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
+function DocSidebarDesktop({ path, sidebar, onCollapse }: Props) {
   const {
     navbar: { hideOnScroll },
     docs: {
@@ -16,11 +16,13 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
     },
   } = useThemeConfig();
 
-  // State to manage sidebar visibility
-  const [isSidebarHidden, setSidebarHidden] = useState(true);
+  const [isHidden, setIsHidden] = useState(true); // Default to hidden
 
-  const toggleSidebar = () => {
-    setSidebarHidden(!isSidebarHidden);
+  const handleCollapse = () => {
+    setIsHidden(!isHidden);
+    if (onCollapse) {
+      onCollapse();
+    }
   };
 
   return (
@@ -28,12 +30,12 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
       className={clsx(
         styles.sidebar,
         hideOnScroll && styles.sidebarWithHideableNavbar,
-        isSidebarHidden && styles.sidebarHidden,
+        isHidden && styles.sidebarHidden,
       )}
     >
       {hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
       <Content path={path} sidebar={sidebar} />
-      {hideable && <CollapseButton onClick={toggleSidebar} />}
+      {hideable && <CollapseButton onClick={handleCollapse} />}
     </div>
   );
 }
