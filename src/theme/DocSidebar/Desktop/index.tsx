@@ -26,11 +26,11 @@ function DocSidebarDesktop({path, sidebar, onCollapse, isHidden}: Props) {
   return (
     <div
       className={clsx(
-        styles.sidebar,
-        hideOnScroll && styles.sidebarWithHideableNavbar,
-        hidden && styles.sidebarHidden,
+        'sidebar', // Use plain string class names
+        hideOnScroll && 'sidebarWithHideableNavbar',
+        hidden && 'sidebarHidden',
       )}>
-      {hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
+      {hideOnScroll && <Logo tabIndex={-1} className="sidebarLogo" />}
       <Content path={path} sidebar={sidebar} />
       {hideable && <CollapseButton onClick={() => setHidden(!hidden)} />} {/* Toggle visibility */}
     </div>
