@@ -7,20 +7,18 @@
 
 @media (min-width: 997px) {
   .sidebar {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding-top: var(--ifm-navbar-height);
-    width: var(--doc-sidebar-width);
-  }
+  transition: transform 0.3s ease;
+  /* Other styles */
+}
+
+.sidebarHidden {
+  transform: translateX(-100%);
+  /* Other styles to ensure it's hidden properly */
+}
+
 
   .sidebarWithHideableNavbar {
     padding-top: 0;
-  }
-
-  .sidebarHidden {
-    opacity: 0;
-    visibility: hidden;
   }
 
   .sidebarLogo {
