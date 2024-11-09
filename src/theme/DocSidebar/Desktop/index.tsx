@@ -8,7 +8,7 @@ import type { Props } from '@theme/DocSidebar/Desktop';
 
 import styles from './styles.module.css';
 
-function DocSidebarDesktop({ path, sidebar, onCollapse }: Props) {
+function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
   const {
     navbar: { hideOnScroll },
     docs: {
@@ -16,13 +16,11 @@ function DocSidebarDesktop({ path, sidebar, onCollapse }: Props) {
     },
   } = useThemeConfig();
 
-  const [isHidden, setIsHidden] = useState(true);
+  // State to manage sidebar visibility
+  const [isSidebarHidden, setSidebarHidden] = useState(true);
 
-  const handleToggleSidebar = () => {
-    setIsHidden(!isHidden);
-    if (onCollapse) {
-      onCollapse();
-    }
+  const toggleSidebar = () => {
+    setSidebarHidden(!isSidebarHidden);
   };
 
   return (
@@ -30,12 +28,12 @@ function DocSidebarDesktop({ path, sidebar, onCollapse }: Props) {
       className={clsx(
         styles.sidebar,
         hideOnScroll && styles.sidebarWithHideableNavbar,
-        isHidden && styles.sidebarHidden,
+        isSidebarHidden && styles.sidebarHidden,
       )}
     >
       {hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
-      {!isHidden && <Content path={path} sidebar={sidebar} />}
-      {hideable && <CollapseButton onClick={handleToggleSidebar} />}
+      <Content path={path} sidebar={sidebar} />
+      {hideable && <CollapseButton onClick={toggleSidebar} />}
     </div>
   );
 }
