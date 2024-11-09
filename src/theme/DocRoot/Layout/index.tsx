@@ -9,9 +9,6 @@ import type { Props } from '@theme/DocRoot/Layout/Sidebar';
 
 import styles from './styles.module.css';
 
-// Reset sidebar state when sidebar changes
-// Use React key to unmount/remount the children
-// See https://github.com/facebook/docusaurus/issues/3414
 function ResetOnSidebarChange({ children }: { children: ReactNode }) {
   const sidebar = useDocsSidebar();
   return (
@@ -28,12 +25,11 @@ export default function DocRootLayoutSidebar({
 
 +  // 将初始状态设置为 true，使侧边栏默认隐藏
 +  const [hiddenSidebar, setHiddenSidebar] = useState(true);
+
   const toggleSidebar = useCallback(() => {
-    if (hiddenSidebar) {
-      setHiddenSidebar(false);
-    }
-    setHiddenSidebarContainer((value) => !value);
-  }, [setHiddenSidebarContainer, hiddenSidebar]);
++    setHiddenSidebar((prev) => !prev);
++    setHiddenSidebarContainer((prev) => !prev);
+  }, [setHiddenSidebarContainer]);
 
   return (
     <aside
@@ -49,9 +45,9 @@ export default function DocRootLayoutSidebar({
           return;
         }
 
-        if (hiddenSidebarContainer) {
-          setHiddenSidebar(true);
-        }
++        if (!hiddenSidebarContainer) {
++          setHiddenSidebar(false);
++        }
       }}>
       <ResetOnSidebarChange>
         <div
