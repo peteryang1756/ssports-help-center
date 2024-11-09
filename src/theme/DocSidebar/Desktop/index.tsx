@@ -2,12 +2,13 @@ import React from 'react';
 import clsx from 'clsx';
 import {useThemeConfig} from '@docusaurus/theme-common';
 import Logo from '@theme/Logo';
+import CollapseButton from '@theme/DocSidebar/Desktop/CollapseButton';
 import Content from '@theme/DocSidebar/Desktop/Content';
 import type {Props} from '@theme/DocSidebar/Desktop';
 
 import styles from './styles.module.css';
 
-function DocSidebarDesktop({path, sidebar, onCollapse}: Props) {
+function DocSidebarDesktop({path, sidebar, onCollapse, isHidden: propIsHidden}: Props) {
   const {
     navbar: {hideOnScroll},
     docs: {
@@ -15,8 +16,8 @@ function DocSidebarDesktop({path, sidebar, onCollapse}: Props) {
     },
   } = useThemeConfig();
 
-  // Default the sidebar to be hidden
-  const isHidden = true;
+  // 強制設定 isHidden 的初始值為 true
+  const isHidden = hideable ? propIsHidden : false;
 
   return (
     <div
@@ -27,7 +28,7 @@ function DocSidebarDesktop({path, sidebar, onCollapse}: Props) {
       )}>
       {hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
       <Content path={path} sidebar={sidebar} />
-      {/* Remove the CollapseButton */}
+      {hideable && <CollapseButton onClick={onCollapse} />}
     </div>
   );
 }
