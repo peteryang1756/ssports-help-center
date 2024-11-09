@@ -1,38 +1,42 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
-import {useThemeConfig} from '@docusaurus/theme-common';
+import { useThemeConfig } from '@docusaurus/theme-common';
 import Logo from '@theme/Logo';
 import CollapseButton from '@theme/DocSidebar/Desktop/CollapseButton';
 import Content from '@theme/DocSidebar/Desktop/Content';
-import type {Props} from '@theme/DocSidebar/Desktop';
+import type { Props } from '@theme/DocSidebar/Desktop';
 
 import styles from './styles.module.css';
 
-function DocSidebarDesktop({path, sidebar, onCollapse, isHidden}: Props) {
+function DocSidebarDesktop({ path, sidebar, onCollapse }: Props) {
   const {
-    navbar: {hideOnScroll},
+    navbar: { hideOnScroll },
     docs: {
-      sidebar: {hideable = true}, // default to true
+      sidebar: { hideable },
     },
   } = useThemeConfig();
+
+  // State to manage the visibility of the sidebar
+  const [isHidden, setIsHidden] = useState(true);
+
+  const handleToggleSidebar = () => {
+    setIsHidden(!isHidden);
+    if (onCollapse) {
+      onCollapse();
+    }
+  };
 
   return (
     <div
       className={clsx(
         styles.sidebar,
         hideOnScroll && styles.sidebarWithHideableNavbar,
-        (hideable && isHidden) && styles.sidebarHidden, // add this condition
-      )}>
+        isHidden && styles.sidebarHidden,
+      )}
+    >
       {hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
       <Content path={path} sidebar={sidebar} />
-      {hideable && <CollapseButton onClick={onCollapse} />}
+      {hideable && <CollapseButton onClick={handleToggleSidebar} />}
     </div>
   );
 }
