@@ -431,6 +431,10 @@ html[data-theme="light"] .darkTheme {
     margin-left: 0rem !important;
   }
 }
+/* Hide the sidebar */
+div[class^='docSidebarContainer'] {
+  display: none;
+}
 .pagination-nav {
   display: none;
 }
