@@ -458,5 +458,5 @@ div[class^='docSidebarContainer'] {
 
 /* styles.module.css */
 .sidebarHidden {
-  display: none; /* 隱藏元素 */
+  display: none; /* 完全隱藏側邊欄，不佔用空間 */
 }
