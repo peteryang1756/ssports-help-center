@@ -460,3 +460,13 @@ div[class^='docSidebarContainer'] {
 .sidebarHidden {
   display: none; /* 完全隱藏側邊欄，不佔用空間 */
 }
+
+.mainContent {
+  width: 100%; /* Ensure the main content uses the full width */
+  /* Remove or adjust any margins that were used for the sidebar */
+}
+
+/* Remove any specific styles related to the sidebar */
+.sidebar {
+  display: none;
+}
