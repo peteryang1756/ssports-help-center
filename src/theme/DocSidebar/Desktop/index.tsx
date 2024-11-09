@@ -1,36 +1,49 @@
-import React, {useState, useEffect} from 'react';
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import {useThemeConfig} from '@docusaurus/theme-common';
 import Logo from '@theme/Logo';
+import CollapseButton from '@theme/DocSidebar/Desktop/CollapseButton';
 import Content from '@theme/DocSidebar/Desktop/Content';
 import type {Props} from '@theme/DocSidebar/Desktop';
 
-function DocSidebarDesktop({path, sidebar, onCollapse, isHidden}: Props) {
+function DocSidebarDesktop({path, sidebar, onCollapse, isHidden: isHiddenProp}: Props) {
+  const [isHidden, setIsHidden] = useState(true); // 預設為隱藏狀態
+
   const {
     navbar: {hideOnScroll},
     docs: {
-      sidebar: {hideable = true}, // Make hideable default to true
+      sidebar: {hideable},
     },
   } = useThemeConfig();
 
-  const [hidden, setHidden] = useState(true); // Set initial state to hidden
-
-  // Call onCollapse to sync with parent state if necessary
   useEffect(() => {
-    if (hidden && onCollapse) {
-      onCollapse();
-    }
-  }, [hidden, onCollapse]);
+    setIsHidden(isHiddenProp);
+  }, [isHiddenProp]);
 
   return (
     <div
       className={clsx(
-        'sidebar', // Use plain string class names
+        'sidebar',
         hideOnScroll && 'sidebarWithHideableNavbar',
-        hidden && 'sidebarHidden',
+        isHidden && 'sidebarHidden',
       )}>
       {hideOnScroll && <Logo tabIndex={-1} className="sidebarLogo" />}
       <Content path={path} sidebar={sidebar} />
+      {hideable && (
+        <CollapseButton 
+          onClick={() => {
+            setIsHidden(!isHidden);
+            onCollapse();
+          }} 
+        />
+      )}
     </div>
   );
 }
