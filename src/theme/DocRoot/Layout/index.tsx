@@ -1,23 +1,21 @@
-import React, {type ReactNode, useState, useCallback} from 'react';
+import React, { type ReactNode, useState, useCallback } from 'react';
 import clsx from 'clsx';
-import {ThemeClassNames} from '@docusaurus/theme-common';
-import {useDocsSidebar} from '@docusaurus/theme-common/internal';
-import {useLocation} from '@docusaurus/router';
+import { ThemeClassNames } from '@docusaurus/theme-common';
+import { useDocsSidebar } from '@docusaurus/theme-common/internal';
+import { useLocation } from '@docusaurus/router';
 import DocSidebar from '@theme/DocSidebar';
 import ExpandButton from '@theme/DocRoot/Layout/Sidebar/ExpandButton';
-import type {Props} from '@theme/DocRoot/Layout/Sidebar';
+import type { Props } from '@theme/DocRoot/Layout/Sidebar';
 
 import styles from './styles.module.css';
 
 // Reset sidebar state when sidebar changes
 // Use React key to unmount/remount the children
 // See https://github.com/facebook/docusaurus/issues/3414
-function ResetOnSidebarChange({children}: {children: ReactNode}) {
+function ResetOnSidebarChange({ children }: { children: ReactNode }) {
   const sidebar = useDocsSidebar();
   return (
-    <React.Fragment key={sidebar?.name ?? 'noSidebar'}>
-      {children}
-    </React.Fragment>
+    <React.Fragment key={sidebar?.name ?? 'noSidebar'}>{children}</React.Fragment>
   );
 }
 
@@ -26,9 +24,10 @@ export default function DocRootLayoutSidebar({
   hiddenSidebarContainer,
   setHiddenSidebarContainer,
 }: Props): JSX.Element {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
 
-  const [hiddenSidebar, setHiddenSidebar] = useState(true); // Set to true to start hidden
++  // 将初始状态设置为 true，使侧边栏默认隐藏
++  const [hiddenSidebar, setHiddenSidebar] = useState(true);
   const toggleSidebar = useCallback(() => {
     if (hiddenSidebar) {
       setHiddenSidebar(false);
@@ -44,7 +43,9 @@ export default function DocRootLayoutSidebar({
         hiddenSidebarContainer && styles.docSidebarContainerHidden,
       )}
       onTransitionEnd={(e) => {
-        if (!e.currentTarget.classList.contains(styles.docSidebarContainer!)) {
+        if (
+          !e.currentTarget.classList.contains(styles.docSidebarContainer!)
+        ) {
           return;
         }
 
