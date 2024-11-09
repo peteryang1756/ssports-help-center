@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import clsx from 'clsx';
 import {useThemeConfig} from '@docusaurus/theme-common';
@@ -8,23 +15,20 @@ import type {Props} from '@theme/DocSidebar/Desktop';
 
 import styles from './styles.module.css';
 
-function DocSidebarDesktop({path, sidebar, onCollapse, isHidden: propIsHidden}: Props) {
+function DocSidebarDesktop({path, sidebar, onCollapse, isHidden}: Props) {
   const {
     navbar: {hideOnScroll},
     docs: {
-      sidebar: {hideable},
+      sidebar: {hideable = true}, // default to true
     },
   } = useThemeConfig();
-
-  // 強制設定 isHidden 的初始值為 true
-  const isHidden = hideable ? propIsHidden : false;
 
   return (
     <div
       className={clsx(
         styles.sidebar,
         hideOnScroll && styles.sidebarWithHideableNavbar,
-        isHidden && styles.sidebarHidden,
+        (hideable && isHidden) && styles.sidebarHidden, // add this condition
       )}>
       {hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
       <Content path={path} sidebar={sidebar} />
