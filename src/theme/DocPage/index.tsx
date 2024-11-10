@@ -54,9 +54,9 @@ export default function DocPage(props: Props): JSX.Element {
           props.versionMetadata.className,
         )}>
         <DocsVersionProvider version={versionMetadata}>
-
+          <DocsSidebarProvider name={sidebarName} items={sidebarItems}>
             <DocPageLayout>{docElement}</DocPageLayout>
-
+          </DocsSidebarProvider>
         </DocsVersionProvider>
       </HtmlClassNameProvider>
     </>
