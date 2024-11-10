@@ -14,7 +14,7 @@ const DocsRating = () => {
       {haveVoted && !liked ? (
         <div className="text--left">
           抱歉，讓你感到文章不實用，歡迎你與我們反饋如何讓文章更實用！
-         <a href ="https://ssport.eu.org/docs-feedback">填寫意見</a> 
+         <a href ="https://survey.ssangyongsports.eu.org/form/c12Fguuc">填寫意見</a> 
         </div>
       ) : haveVoted && liked ? (
         "感謝你的評價😀"
