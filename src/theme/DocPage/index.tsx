@@ -7,7 +7,6 @@ import {
 } from '@docusaurus/theme-common';
 import {
   docVersionSearchTag,
-  DocsSidebarProvider,
   DocsVersionProvider,
   useDocRouteMetadata,
 } from '@docusaurus/theme-common/internal';
@@ -42,21 +41,18 @@ export default function DocPage(props: Props): JSX.Element {
   if (!currentDocRouteMetadata) {
     return <NotFound />;
   }
-  const {docElement, sidebarName, sidebarItems} = currentDocRouteMetadata;
+  const {docElement} = currentDocRouteMetadata;
   return (
     <>
       <DocPageMetadata {...props} />
       <HtmlClassNameProvider
         className={clsx(
-          // TODO: it should be removed from here
           ThemeClassNames.wrapper.docsPages,
           ThemeClassNames.page.docsDocPage,
           props.versionMetadata.className,
         )}>
         <DocsVersionProvider version={versionMetadata}>
-
-            <DocPageLayout>{docElement}</DocPageLayout>
-
+          <DocPageLayout>{docElement}</DocPageLayout>
         </DocsVersionProvider>
       </HtmlClassNameProvider>
     </>
