@@ -28,12 +28,10 @@ export default function DocPageLayoutSidebar({
 }: Props): JSX.Element {
   const {pathname} = useLocation();
 
-  // Set initial states to true to hide sidebar by default
+  // Set initial state of hiddenSidebar to true so it starts hidden
   const [hiddenSidebar, setHiddenSidebar] = useState(true);
   const toggleSidebar = useCallback(() => {
-    if (hiddenSidebar) {
-      setHiddenSidebar(false);
-    }
+    setHiddenSidebar(!hiddenSidebar);
     setHiddenSidebarContainer((value) => !value);
   }, [setHiddenSidebarContainer, hiddenSidebar]);
 
@@ -62,6 +60,7 @@ export default function DocPageLayoutSidebar({
         />
       </ResetOnSidebarChange>
 
+      {/* Show ExpandButton when sidebar is hidden */}
       {hiddenSidebar && <ExpandButton toggleSidebar={toggleSidebar} />}
     </aside>
   );
