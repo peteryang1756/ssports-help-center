@@ -1,10 +1,9 @@
-import React, { type ReactNode, useState, useCallback, useEffect } from 'react';
+import React, { type ReactNode, useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { ThemeClassNames } from '@docusaurus/theme-common';
 import { useDocsSidebar } from '@docusaurus/theme-common/internal';
 import { useLocation } from '@docusaurus/router';
 import DocSidebar from '@theme/DocSidebar';
-import ExpandButton from '@theme/DocPage/Layout/Sidebar/ExpandButton';
 import type { Props } from '@theme/DocPage/Layout/Sidebar';
 
 import styles from './styles.module.css';
@@ -28,16 +27,9 @@ export default function DocPageLayoutSidebar({
   const [hiddenSidebar, setHiddenSidebar] = useState(true);
 
   useEffect(() => {
-    // Set sidebar container to hidden by default on mount
+    // 隱藏 sidebar 在初始加載時
     setHiddenSidebarContainer(true);
   }, [setHiddenSidebarContainer]);
-
-  const toggleSidebar = useCallback(() => {
-    if (hiddenSidebar) {
-      setHiddenSidebar(false);
-    }
-    setHiddenSidebarContainer((value) => !value);
-  }, [setHiddenSidebarContainer, hiddenSidebar]);
 
   return (
     <aside
@@ -51,6 +43,7 @@ export default function DocPageLayoutSidebar({
           return;
         }
 
+        // 保持 sidebar 隱藏狀態
         if (hiddenSidebarContainer) {
           setHiddenSidebar(true);
         }
@@ -59,12 +52,9 @@ export default function DocPageLayoutSidebar({
         <DocSidebar
           sidebar={sidebar}
           path={pathname}
-          onCollapse={toggleSidebar}
           isHidden={hiddenSidebar}
         />
       </ResetOnSidebarChange>
-
-      {hiddenSidebar && <ExpandButton toggleSidebar={toggleSidebar} />}
     </aside>
   );
 }
