@@ -1,65 +1,24 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-import React, {type ReactNode, useState, useCallback} from 'react';
-import clsx from 'clsx';
-import {ThemeClassNames} from '@docusaurus/theme-common';
+import React, {useState} from 'react';
 import {useDocsSidebar} from '@docusaurus/theme-common/internal';
-import {useLocation} from '@docusaurus/router';
-import DocSidebar from '@theme/DocSidebar';
-import ExpandButton from '@theme/DocRoot/Layout/Sidebar/ExpandButton';
-import type {Props} from '@theme/DocRoot/Layout/Sidebar';
+import BackToTopButton from '@theme/BackToTopButton';
+import DocRootLayoutSidebar from '@theme/DocRoot/Layout/Sidebar';
+import DocRootLayoutMain from '@theme/DocRoot/Layout/Main';
+import type {Props} from '@theme/DocRoot/Layout';
 
 import styles from './styles.module.css';
 
-// Reset sidebar state when sidebar changes
-// Use React key to unmount/remount the children
-// See https://github.com/facebook/docusaurus/issues/3414
-function ResetOnSidebarChange({children}: {children: ReactNode}) {
+export default function DocRootLayout({children}: Props): JSX.Element {
   const sidebar = useDocsSidebar();
+  const [hiddenSidebarContainer, setHiddenSidebarContainer] = useState(false);
   return (
-    <React.Fragment key={sidebar?.name ?? 'noSidebar'}>
-      {children}
-    </React.Fragment>
-  );
-}
-
-export default function DocRootLayoutSidebar({
-  sidebar,
-  hiddenSidebarContainer,
-  setHiddenSidebarContainer,
-}: Props): JSX.Element {
-  const {pathname} = useLocation();
-
-  const [hiddenSidebar, setHiddenSidebar] = useState(true); // Changed to true
-  const toggleSidebar = useCallback(() => {
-    if (hiddenSidebar) {
-      setHiddenSidebar(false);
-    }
-    setHiddenSidebarContainer((value) => !value);
-  }, [setHiddenSidebarContainer, hiddenSidebar]);
-
-  return (
-    <aside
-      className={clsx(
-        ThemeClassNames.docs.docSidebarContainer,
-        styles.docSidebarContainer,
-        hiddenSidebarContainer && styles.docSidebarContainerHidden,
-      )}
-      onTransitionEnd={(e) => {
-        if (!e.currentTarget.classList.contains(styles.docSidebarContainer!)) {
-          return;
-        }
-
-        if (hiddenSidebarContainer) {
-          setHiddenSidebar(true);
-        }
-      }}>
+    <div className={styles.docsWrapper}>
+      <BackToTopButton />
+      <div className={styles.docRoot}>
       
-    </aside>
+        <DocRootLayoutMain hiddenSidebarContainer={hiddenSidebarContainer}>
+          {children}
+        </DocRootLayoutMain>
+      </div>
+    </div>
   );
 }
