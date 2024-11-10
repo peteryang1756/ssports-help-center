@@ -59,21 +59,7 @@ export default function DocRootLayoutSidebar({
           setHiddenSidebar(true);
         }
       }}>
-      <ResetOnSidebarChange>
-        <div
-          className={clsx(
-            styles.sidebarViewport,
-            hiddenSidebar && styles.sidebarViewportHidden,
-          )}>
-          <DocSidebar
-            sidebar={sidebar}
-            path={pathname}
-            onCollapse={toggleSidebar}
-            isHidden={hiddenSidebar}
-          />
-          {hiddenSidebar && <ExpandButton toggleSidebar={toggleSidebar} />}
-        </div>
-      </ResetOnSidebarChange>
+      
     </aside>
   );
 }
