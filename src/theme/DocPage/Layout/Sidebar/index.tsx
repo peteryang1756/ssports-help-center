@@ -1,18 +1,15 @@
-import React, {type ReactNode, useState, useCallback} from 'react';
+import React, { type ReactNode, useState, useCallback, useEffect } from 'react';
 import clsx from 'clsx';
-import {ThemeClassNames} from '@docusaurus/theme-common';
-import {useDocsSidebar} from '@docusaurus/theme-common/internal';
-import {useLocation} from '@docusaurus/router';
+import { ThemeClassNames } from '@docusaurus/theme-common';
+import { useDocsSidebar } from '@docusaurus/theme-common/internal';
+import { useLocation } from '@docusaurus/router';
 import DocSidebar from '@theme/DocSidebar';
 import ExpandButton from '@theme/DocPage/Layout/Sidebar/ExpandButton';
-import type {Props} from '@theme/DocPage/Layout/Sidebar';
+import type { Props } from '@theme/DocPage/Layout/Sidebar';
 
 import styles from './styles.module.css';
 
-// Reset sidebar state when sidebar changes
-// Use React key to unmount/remount the children
-// See https://github.com/facebook/docusaurus/issues/3414
-function ResetOnSidebarChange({children}: {children: ReactNode}) {
+function ResetOnSidebarChange({ children }: { children: ReactNode }) {
   const sidebar = useDocsSidebar();
   return (
     <React.Fragment key={sidebar?.name ?? 'noSidebar'}>
@@ -26,12 +23,19 @@ export default function DocPageLayoutSidebar({
   hiddenSidebarContainer,
   setHiddenSidebarContainer,
 }: Props): JSX.Element {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
 
-  // Set initial state of hiddenSidebar to true so it starts hidden
   const [hiddenSidebar, setHiddenSidebar] = useState(true);
+
+  useEffect(() => {
+    // Set sidebar container to hidden by default on mount
+    setHiddenSidebarContainer(true);
+  }, [setHiddenSidebarContainer]);
+
   const toggleSidebar = useCallback(() => {
-    setHiddenSidebar(!hiddenSidebar);
+    if (hiddenSidebar) {
+      setHiddenSidebar(false);
+    }
     setHiddenSidebarContainer((value) => !value);
   }, [setHiddenSidebarContainer, hiddenSidebar]);
 
@@ -60,7 +64,6 @@ export default function DocPageLayoutSidebar({
         />
       </ResetOnSidebarChange>
 
-      {/* Show ExpandButton when sidebar is hidden */}
       {hiddenSidebar && <ExpandButton toggleSidebar={toggleSidebar} />}
     </aside>
   );
