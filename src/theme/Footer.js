@@ -32,8 +32,7 @@ export default function FooterWrapper(props) {
         floatingButtonStyle={floatingButtonStyle}
         anon_key="d24adf46-bada-44ef-a25b-94d01fe6fb3e"
         dialogPlaceholder="如何聯繫雙龍體育?"
-        footer.bottom.RightLink="聯繫客服" // Corrected property
-        footer.bottomRightLink.link="https://ssangyongsports.eu.org/contact"
+        
       />
       <Footer {...props} />
     </>
