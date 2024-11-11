@@ -27,7 +27,7 @@ export default function FooterWrapper(props) {
     <>
       <MendableFloatingButton
         icon={icon}
-        dismissPopupAfter={2}
+        dismissPopupAfter={0.000001}
         welcomeMessage={welcomeMessage}
         messageSettings={{ hideSources: true }} // Fixed object syntax
         floatingButtonStyle={floatingButtonStyle}
