@@ -44,7 +44,6 @@ export default function DocItemContent({children}: Props): JSX.Element {
       )}
       <MDXContent>{children}</MDXContent>
     <DocsRating />
-<ChatwootWidget />
     </div>
   );
 }
