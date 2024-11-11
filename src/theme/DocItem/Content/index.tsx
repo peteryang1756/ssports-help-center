@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+import ChatwootWidget from './ChatwootWidget'
 import React from 'react';
 import clsx from 'clsx';
 import {ThemeClassNames} from '@docusaurus/theme-common';
@@ -44,6 +44,7 @@ export default function DocItemContent({children}: Props): JSX.Element {
       )}
       <MDXContent>{children}</MDXContent>
     <DocsRating />
+<ChatwootWidget />
     </div>
   );
 }
