@@ -12,7 +12,7 @@ export default function FooterWrapper(props) {
 
   return (
     <>
-      <MendableFloatingButton anon_key='d24adf46-bada-44ef-a25b-94d01fe6fb3e' />
+      <MendableFloatingButton icon={icon} anon_key='d24adf46-bada-44ef-a25b-94d01fe6fb3e' />
       <Footer {...props} />
     </>
   )
