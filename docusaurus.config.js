@@ -77,6 +77,9 @@ const config = {
         contextualSearch: true,
         searchParameters: {},
       },
+      customFields:{
+    mendableAnonKey: "d24adf46-bada-44ef-a25b-94d01fe6fb3e",
+},
       footer: {
         style: 'light',
         logo: {
