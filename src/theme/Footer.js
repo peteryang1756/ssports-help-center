@@ -12,7 +12,7 @@ export default function FooterWrapper(props) {
   const welcomeMessage = "任何需要幫雙龍體育協助嗎?"
 const floatingButtonStyle = {
     color: "#e2e8f0",
-    backgroundColor: "#e2e8f0"
+    backgroundColor: "#000000"
 }
   return (
     <>
