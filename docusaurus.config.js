@@ -11,7 +11,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'https://i.imgur.com/CfQiMkp.png',
+  favicon: 'https://88ij.vercel.app/1000001111-removebg-preview.png',
 
   // GitHub pages deployment config.
   organizationName: 'ssangyongsportsorg', // GitHub organization/user name
