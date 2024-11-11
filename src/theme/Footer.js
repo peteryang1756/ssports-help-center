@@ -16,7 +16,7 @@ const floatingButtonStyle = {
 }
   return (
     <>
-      <MendableFloatingButton icon={icon} popupText={popupText} welcomeMessage={welcomeMessage} floatingButtonStyle={floatingButtonStyle} anon_key='d24adf46-bada-44ef-a25b-94d01fe6fb3e' dialogPlaceholder="如何聯繫雙龍體育?" />
+      <MendableFloatingButton icon={icon} popupText={popupText} welcomeMessage={welcomeMessage} floatingButtonStyle={floatingButtonStyle} anon_key='d24adf46-bada-44ef-a25b-94d01fe6fb3e' footer.bottomRightLinl=聯繫客服"dialogPlaceholder="如何聯繫雙龍體育?" />
       <Footer {...props} />
     </>
   )
