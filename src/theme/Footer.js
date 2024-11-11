@@ -7,6 +7,8 @@ export default function FooterWrapper(props) {
   const {
     siteConfig: { customFields },
   } = useDocusaurusContext()
+  const icon = <img src="https://88ij.vercel.app/1000001111-removebg-preview.png?text=Logo" />
+
 
   return (
     <>
