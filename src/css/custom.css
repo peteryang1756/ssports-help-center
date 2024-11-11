@@ -473,6 +473,6 @@ div[class^='docSidebarContainer'] {
 .ms-flex.ms-flex-row.ms-items-center.ms-justify-between.ms-gap-1 > p {
     display: none !important;
 }
-.theme-doc-footer {
+.backToTopButton {
     display: none;
 }
