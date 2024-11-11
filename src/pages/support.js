@@ -32,7 +32,7 @@ function Home() {
       </header>
       <hr></hr>
       <ExploreContent />
-           <ChatwootWidget />
+           
       <hr></hr>
       <main>
      </main>
