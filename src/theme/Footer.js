@@ -14,7 +14,7 @@ export default function FooterWrapper(props) {
       alt="Logo"
     />
   );
-  const showPopup = 'false'
+  
   const popupText = '詢問任何問題?';
   const welcomeMessage = '任何需要雙龍體育協助的嗎?';
 
@@ -27,7 +27,7 @@ export default function FooterWrapper(props) {
     <>
       <MendableFloatingButton
         icon={icon}
-        showPopup={showPopup}
+        showPopup=false
         welcomeMessage={welcomeMessage}
         messageSettings={{ hideSources: true }} // Fixed object syntax
         floatingButtonStyle={floatingButtonStyle}
