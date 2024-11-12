@@ -2,6 +2,8 @@ import React from 'react';
 import Footer from '@theme-original/Footer';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { MendableFloatingButton } from '@mendable/search';
+import ChatwootWidget from '../components/ChatwootWidget'
+
 
 export default function FooterWrapper(props) {
   const {
@@ -25,16 +27,7 @@ export default function FooterWrapper(props) {
 
   return (
     <>
-      <MendableFloatingButton
-        icon={icon}
-        dismissPopupAfter={1}
-        welcomeMessage={welcomeMessage}
-        messageSettings={{ hideSources: true }} // Fixed object syntax
-        floatingButtonStyle={floatingButtonStyle}
-        anon_key="d24adf46-bada-44ef-a25b-94d01fe6fb3e"
-        dialogPlaceholder="如何聯繫雙龍體育?"
-        
-      />
+      <ChatwootWidget />
       <Footer {...props} />
     </>
   );
