@@ -1,3 +1,4 @@
+
 :root {
   --ifm-color-primary: #3162ac;
   --ifm-color-primary-dark: #2c589b;
@@ -473,6 +474,7 @@ div[class^='docSidebarContainer'] {
 .ms-flex.ms-flex-row.ms-items-center.ms-justify-between.ms-gap-1 > p {
     display: none !important;
 }
-.backToTopButton {
-    display: none;
+/* 隱藏 Helpscout logo */
+#BeaconContainer .BeaconFooter {
+    display: none !important;
 }
