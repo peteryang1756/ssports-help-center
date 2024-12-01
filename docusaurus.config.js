@@ -8,7 +8,7 @@ const config = {
   title: '雙龍體育幫助',
   tagline: '雙龍體育幫助中心',
   url: 'https://ssangyongsports.eu.org',
-  baseUrl: '/support/',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'https://88ij.vercel.app/1000001111-removebg-preview.png',
