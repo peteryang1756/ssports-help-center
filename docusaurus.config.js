@@ -58,9 +58,24 @@ routeBasePath: 'support',
           href: '/support',
           className: 'custom-navbar-logo-class',
         },
-        items: [
-          {
-            href: 'https://www.ssangyongsports.org/',
+        items: [        
+{
+            href: 'https://ssangyongsports.eu.org/contacy',
+            label: '聯繫我們',
+            position: 'left',
+          },
+{
+            href: 'https://help.ssangyongsports.eu.org/',
+            label: '查看客服回覆進度',
+            position: 'left',
+          },
+ {
+            href: 'https://forum.ssangyongsports.eu.org/',
+            label: '論壇',
+            position: 'left',
+          },
+ {
+            href: 'https://ssangyongsports.eu.org/',
             label: '回首頁',
             position: 'left',
           },
