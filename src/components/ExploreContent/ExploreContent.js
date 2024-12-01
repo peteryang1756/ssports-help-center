@@ -25,7 +25,7 @@ const firstDataRow = [
   },
   {
     title: "聯繫",
-    link: "/docs/contact",
+    link: "/support/contact",
     icon: "/123.webp",
     description: (
       <>
