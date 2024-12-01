@@ -118,16 +118,16 @@ routeBasePath: 'support',
           {
             title: '組織',
             items: [
-              { label: 'blog', href: 'https://ssangyongsports.eu.org/blog' },
-              { label: '狀態', href: 'https://status.ssangyongsports.eu.org/' },
+              { label: '部落格', href: 'https://ssangyongsports.eu.org/blog' },
+              { label: '雙龍體育TV', href: 'https://ssangyongsports.eu.org/tv' },
             ],
           },
           {
             title: '幫助',
             items: [
-              { label: '幫助', href: 'https://help.ssangyongsports.eu.org/' },
-              { label: '社區', href: 'https://forum.ssangyongsports.eu.org/' },
-              { label: '聯繫', href: 'https://ssangyongsports.eu.org/contact' },
+              { label: '聯繫我們', href: 'https://ssangyongsports.eu.org/contacy' },
+              { label: '論壇', href: 'https://forum.ssangyongsports.eu.org/' },
+              { label: '查看回覆進度', href: 'https://help.ssangyongsports.eu.org/' },
             ],
           },
         ],
