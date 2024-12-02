@@ -27,7 +27,7 @@
             background-color: var(--bg-light);
             padding: 1.5rem;
            max-width: 1280px;
-          margin: 20 auto;
+          margin: 10 auto;
         }
 
         .dark-mode .footer {
