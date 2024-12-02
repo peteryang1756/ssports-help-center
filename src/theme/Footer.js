@@ -153,7 +153,7 @@ export default function FooterWrapper(props) {
       </ul>
     </div>
   </div>
-  <hr className="footer-divider" />
+<hr className="custom-hr" />
   <div className="footer-bottom">
     <div className="footer-logo">
       <a href="/">
