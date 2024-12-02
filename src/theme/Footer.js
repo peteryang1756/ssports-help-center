@@ -27,103 +27,147 @@ export default function FooterWrapper(props) {
   return (
     <>
       <ChatwootWidget />
-      <footer className="footer">
-        <div className="footer-grid">
-          <div>
-            <h2 className="footer-section-title">組織</h2>
-            <ul className="footer-list">
-              <li className="footer-list-item">
-                <a href="https://ssangyongsports.eu.org/blog" className="footer-link">部落格</a>
-              </li>
-              <li className="footer-list-item">
-                <a href="https://ssangyongsports.eu.org/contact" className="footer-link">聯繫</a>
-              </li>
-              <li className="footer-list-item">
-                <a id="footer-badge" href="https://status.ssangyongsports.eu.org" className="footer-link">
-                  載入狀態中
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="footer-section-title">體育</h2>
-            <ul className="footer-list">
-              <li className="footer-list-item">
-                <a href="https://slb.ssport.eu.org/" className="footer-link">雙龍職棒</a>
-              </li>
-              <li className="footer-list-item">
-                <a href="https://sba.ssangyongsports.eu.org/" className="footer-link">雙龍職籃</a>
-              </li>
-              <li className="footer-list-item">
-                <a href="https://js.ssangyongsports.eu.org/" className="footer-link">雙龍足球</a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="footer-section-title">條款</h2>
-            <ul className="footer-list">
-              <li className="footer-list-item">
-                <a href="https://ssangyongsports.eu.org/p" className="footer-link">隱私政策</a>
-              </li>
-              <li className="footer-list-item">
-                <a href="https://ssangyongsports.eu.org/t" className="footer-link">服務條款</a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="footer-section-title">雙龍體育TV</h2>
-            <ul className="footer-list">
-              <li className="footer-list-item">
-                <a href="https://ssangyongsports.eu.org/tv" className="footer-link">官網</a>
-              </li>
-              <li className="footer-list-item">
-                <a href="https://ssangyongsports.eu.org/contact?mode=tv" className="footer-link">註冊</a>
-              </li>
-              <li className="footer-list-item">
-                <a href="https://ssangyongsports.org/watch-tv" className="footer-link">登入</a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="footer-section-title">幫助</h2>
-            <ul className="footer-list">
-              <li className="footer-list-item">
-                <a href="https://ssangyongsports.eu.org/support" className="footer-link">幫助中心</a>
-              </li>
-              <li className="footer-list-item">
-                <a href="https://backed-live.ssport.eu.org/" className="footer-link">線上客服</a>
-              </li>
-              <li className="footer-list-item">
-                <a href="https://forum.ssangyongsports.eu.org/d/1" className="footer-link">論壇</a>
-              </li>
-              <li className="footer-list-item">
-                <a href="https://ssangyongsports.eu.org/contact" className="footer-link">聯繫</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <hr className="footer-divider" />
-
-        <div className="footer-bottom">
-          <div className="footer-logo">
-            <a href="https://ssangyongsports.eu.org/">
-              <img src="https://ssangyongsports.eu.org/logo.png" alt="雙龍體育Logo" />
-            </a>
-          </div>
-
-          <span className="footer-copyright">
-            Copyright © 2024 
-            <a href="https://ssangyongsports.eu.org/" className="footer-link">雙龍體育</a>
-            保留一切權利。
-          </span>
-
-          <div className="social-links">
-       <a href="https://www.facebook.com/ssangyongsports/" target="_blank">
+    <footer className="footer">
+  <div className="footer-grid">
+    <div>
+      <h2 className="footer-section-title">組織</h2>
+      <ul className="footer-list">
+        <li className="footer-list-item">
+          <a href="https://ssangyongsports.eu.org/blog" className="footer-link">
+            部落格
+          </a>
+        </li>
+        <li className="footer-list-item">
+          <a
+            href="https://ssangyongsports.eu.org/contact"
+            className="footer-link"
+          >
+            聯繫
+          </a>
+        </li>
+        <li className="footer-list-item">
+          <a
+            id="footer-badge"
+            href="https://status.ssangyongsports.eu.org"
+            className="footer-link"
+          >
+            載入狀態中
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2 className="footer-section-title">體育</h2>
+      <ul className="footer-list">
+        <li className="footer-list-item">
+          <a href="https://slb.ssport.eu.org/" className="footer-link">
+            雙龍職棒
+          </a>
+        </li>
+        <li className="footer-list-item">
+          <a href="https://sba.ssangyongsports.eu.org/" className="footer-link">
+            雙龍職籃
+          </a>
+        </li>
+        <li className="footer-list-item">
+          <a href="https://js.ssangyongsports.eu.org/" className="footer-link">
+            雙龍足球
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2 className="footer-section-title">條款</h2>
+      <ul className="footer-list">
+        <li className="footer-list-item">
+          <a href="https://ssangyongsports.eu.org//p" className="footer-link">
+            隱私政策
+          </a>
+        </li>
+        <li className="footer-list-item">
+          <a href="https://ssangyongsports.eu.org//t" className="footer-link">
+            服務條款
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2 className="footer-section-title">雙龍體育TV</h2>
+      <ul className="footer-list">
+        <li className="footer-list-item">
+          <a href="https://ssangyongsports.eu.org//tv" className="footer-link">
+            官網
+          </a>
+        </li>
+        <li className="footer-list-item">
+          <a
+            href="https://ssangyongsports.eu.org/contact?mode=tv"
+            className="footer-link"
+          >
+            註冊
+          </a>
+        </li>
+        <li className="footer-list-item">
+          <a
+            href="https://ssangyongsports.eu.org/watch-tv"
+            className="footer-link"
+          >
+            登入
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2 className="footer-section-title">幫助</h2>
+      <ul className="footer-list">
+        <li className="footer-list-item">
+          <a
+            href="https://ssangyongsports.eu.org/support"
+            className="footer-link"
+          >
+            幫助中心
+          </a>
+        </li>
+        <li className="footer-list-item">
+          <a href="https://backed-live.ssport.eu.org/" className="footer-link">
+            線上客服
+          </a>
+        </li>
+        <li className="footer-list-item">
+          <a
+            href="https://forum.ssangyongsports.eu.org/"
+            className="footer-link"
+          >
+            論壇
+          </a>
+        </li>
+        <li className="footer-list-item">
+          <a
+            href="https://ssangyongsports.eu.org/contact"
+            className="footer-link"
+          >
+            聯繫
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr className="footer-divider" />
+  <div className="footer-bottom">
+    <div className="footer-logo">
+      <a href="/">
+        <img src="https://ssangyongsports.eu.org/logo.png" alt="雙龍體育Logo" />
+      </a>
+    </div>
+    <span className="footer-copyright">
+      Copyright © 2024
+      <a href="https://ssangyongsports.eu.org/" className="footer-link">
+        雙龍體育
+      </a>
+      保留一切權利。
+    </span>
+    <div className="social-links">
+      <a href="https://www.facebook.com/ssangyongsports/" target="_blank">
         <svg className="social-icon" fill="currentColor" viewBox="0 0 24 24">
           <path
             fillRule="evenodd"
@@ -155,6 +199,7 @@ export default function FooterWrapper(props) {
     </div>
   </div>
 </footer>
+
     </>
   );
 }
