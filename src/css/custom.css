@@ -53,7 +53,12 @@
                 grid-template-columns: repeat(5, 1fr);
             }
         }
-
+.custom-hr {
+    margin: 24px auto; /* Center with margin */
+    border: 1px solid #ddd; /* Light gray border */
+    width: 75%; /* Set the width to 75% */
+    border-radius: 8px; /* Rounded corners */
+}
         .footer-section-title {
             margin-bottom: 1.5rem;
             font-size: 0.875rem;
