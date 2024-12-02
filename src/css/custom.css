@@ -1,3 +1,15 @@
+@media (min-width: 768px) {
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
 :root {
     --bg-light: #f9fafb;
     --bg-dark: #1f2937;
