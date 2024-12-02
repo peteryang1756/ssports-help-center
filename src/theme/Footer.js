@@ -27,6 +27,7 @@ export default function FooterWrapper(props) {
   return (
     <>
       <ChatwootWidget />
+    <div className="anc">
     <footer className="footer">
   <div className="footer-grid">
     <div>
@@ -199,6 +200,8 @@ export default function FooterWrapper(props) {
     </div>
   </div>
 </footer>
+              </div>
+
 
     </>
   );
