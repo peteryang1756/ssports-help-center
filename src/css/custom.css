@@ -26,6 +26,8 @@
         .footer {
             background-color: var(--bg-light);
             padding: 1.5rem;
+           max-width: 4080px;
+            margin: 0 auto;
         }
 
         .dark-mode .footer {
