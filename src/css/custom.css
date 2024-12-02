@@ -29,7 +29,12 @@
                        width: 80%;
           margin:  0 auto;
         }
-
+  .and {
+            background-color: var(--bg-light);
+            padding: 1.5rem;
+                       width: 80%;
+          margin:  0 auto;
+        }
         .dark-mode .footer {
             background-color: var(--bg-dark);
         }
