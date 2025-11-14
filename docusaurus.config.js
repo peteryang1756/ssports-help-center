@@ -54,7 +54,7 @@ routeBasePath: 'support',
         hideOnScroll: false,
         logo: {
           alt: '雙龍體育 Logo',
-          src: 'https://cdn.ssangyongsports.eu.org/image/https://ssangyongsports.eu.org/supportlogo.png',
+          src: 'https://nextimagetransformation.b-cdn.net/image/https://i.ibb.co/sv9C07nP/forum-1763105146433-1000021289-png.png',
           href: '/support',
           className: 'custom-navbar-logo-class',
         },
