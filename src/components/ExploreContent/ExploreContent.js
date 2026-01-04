@@ -6,27 +6,29 @@ import styles from "./styles.module.css";
 
 const firstDataRow = [
   {
-    title: "文章撰寫中",
-    link: "/support",
+    title: "帳號指南",
+    link: "/support/account",
+    icon: "https://i.pixi.mg/i/95d42300dcde26d5155202f9.png",
     description: (
       <>
-        文章撰寫中
+        獲取關於帳號的各種問題
       </>
     ),
   },
   {
-    title: "文章撰寫中",
-    link: "/support",
+    title: "論壇指南",
+    link: "/support/forum",
+    icon: "https://i.pixi.mg/i/ab8ccf1389d81b210b8a6be8.png",
     description: (
       <>
-       文章撰寫中
+        獲取關於雙龍體育論壇的各種問題
       </>
     ),
   },
   {
-    title: "聯繫",
+    title: "聯繫客服指南",
     link: "/support/contact",
-    icon: "/123.webp",
+    icon: "https://i.pixi.mg/i/be2fb9e26639e4cf80f6fbb0.png",
     description: (
       <>
         了解如何聯繫雙龍體育
@@ -128,3 +130,4 @@ function Features() {
 }
 
 export default Features;
+es;
