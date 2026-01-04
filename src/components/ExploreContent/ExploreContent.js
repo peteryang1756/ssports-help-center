@@ -130,4 +130,3 @@ function Features() {
 }
 
 export default Features;
-es;
