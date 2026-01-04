@@ -11,7 +11,7 @@ hr {
   overflow: hidden;
   background-color: #3578e5;
   color: #ffffff;
-  background-image: linear-gradient(#ffffff, rgba(82, 151, 233, 0.79)), url(https://fdddfdf-ssangyongsports.vercel.app/);
+  background-image: linear-gradient(#ffffff, rgba(82, 151, 233, 0.79)), url(https://ik.imagekit.io/sysport/forum-1754499485740-1000019179-webp%20(1).webp);
   animation: waveX 10s linear infinite, waveY 10s linear infinite;
   animation-play-state: paused;
 }
