@@ -54,7 +54,7 @@ routeBasePath: 'support',
         hideOnScroll: false,
         logo: {
           alt: '雙龍體育 Logo',
-          src: 'https://nextimagetransformation.b-cdn.net/image/https://i.ibb.co/sv9C07nP/forum-1763105146433-1000021289-png.png',
+          src: 'https://i.pixi.mg/i/d12a88b4b15e86210ce25913.png',
           href: '/support',
           className: 'custom-navbar-logo-class',
         },
