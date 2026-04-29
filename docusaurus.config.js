@@ -54,32 +54,10 @@ routeBasePath: 'support',
         hideOnScroll: false,
         logo: {
           alt: '雙龍體育 Logo',
-          src: 'https://i.pixi.mg/i/d12a88b4b15e86210ce25913.png',
-          href: '/support',
-          className: 'custom-navbar-logo-class',
+          src: 'https://i.pixi.mg/i/1d12b4723ba119a9be5571f7.png',
+          href: '/',
         },
-        items: [        
-{
-            href: 'https://ssangyongsports.eu.org/contacy',
-            label: '聯繫我們',
-            position: 'left',
-          },
-{
-            href: 'https://help.ssangyongsports.eu.org/',
-            label: '查看客服回覆進度',
-            position: 'left',
-          },
- {
-            href: 'https://forum.ssangyongsports.eu.org/',
-            label: '論壇',
-            position: 'left',
-          },
- {
-            href: 'https://ssangyongsports.eu.org/',
-            label: '回首頁',
-            position: 'left',
-          },
-        ],
+        items: [],
       },
       docs: {
         sidebar: {
