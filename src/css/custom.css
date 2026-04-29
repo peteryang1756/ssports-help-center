@@ -618,6 +618,11 @@ html[data-theme="light"] .darkTheme {
     margin-left: 0rem !important;
   }
 }
+/* ── Custom Navbar: offset page content below fixed navbar (4rem) ── */
+.main-wrapper {
+  padding-top: 4rem !important;
+}
+
 /* ── Custom Navbar: hide Docusaurus sidebar overlay (dummy .navbar is rendered via JSX with inline style) ── */
 .navbar-sidebar,
 .navbar-sidebar__backdrop {
@@ -631,7 +636,7 @@ div[class^='docSidebarContainer'] {
 .pagination-nav {
   display: none;
 }
-/* 隱藏側邊欄 */
+/* 隱��側邊欄 */
 /* 隱藏側邊欄 */
 .theme-doc-sidebar-container {
     display: none;
