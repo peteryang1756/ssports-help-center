@@ -1,0 +1,221 @@
+/* ── Reset ── */
+.ssy-no-scroll { overflow: hidden; }
+
+/* ── Main Header ── */
+#ssy-main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.6);
+  transition: box-shadow 0.2s ease;
+}
+#ssy-main-header.ssy-scrolled {
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+}
+
+.ssy-header-inner {
+  margin: 0 auto;
+  max-width: 80rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+@media (min-width: 640px)  { .ssy-header-inner { padding: 0 1.5rem; } }
+@media (min-width: 1024px) { .ssy-header-inner { padding: 0 2rem; } }
+
+/* ── Logo group ── */
+.ssy-logo-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+#ssy-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+#ssy-logo-link img {
+  height: 1.75rem;
+  width: auto;
+  object-fit: contain;
+}
+.ssy-logo-divider {
+  width: 1px;
+  height: 1.25rem;
+  background-color: #d1d5db;
+  margin: 0 0.75rem;
+  flex-shrink: 0;
+}
+.ssy-logo-blog-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4b5563;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.ssy-logo-blog-link:hover { color: #111827; }
+
+/* ── Desktop Nav ── */
+.ssy-desktop-nav {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+@media (min-width: 1024px) { .ssy-desktop-nav { display: flex; } }
+
+.ssy-nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  padding: 0 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.ssy-nav-link:hover { background: #f3f4f6; color: #111827; }
+
+/* ── Desktop search ── */
+.ssy-desktop-search {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+}
+@media (min-width: 1024px) { .ssy-desktop-search { display: flex; } }
+
+/* ── Icon button ── */
+.ssy-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  color: #4b5563;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ssy-icon-btn:hover { background: #f3f4f6; }
+
+/* ── Mobile controls ── */
+.ssy-mobile-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+@media (min-width: 1024px) { .ssy-mobile-controls { display: none; } }
+
+/* ── Mobile Drawer ── */
+.ssy-mobile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.4);
+  transition: opacity 0.3s, visibility 0.3s;
+}
+.ssy-mobile-overlay.open {
+  visibility: visible;
+  opacity: 1;
+}
+.ssy-mobile-drawer {
+  position: absolute;
+  right: -100%;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.12);
+  transition: right 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 640px) {
+  .ssy-mobile-drawer { width: 24rem; right: -24rem; }
+}
+.ssy-mobile-overlay.open .ssy-mobile-drawer { right: 0; }
+
+.ssy-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+.ssy-drawer-header img { height: 1.5rem; width: auto; }
+
+.ssy-drawer-body { flex: 1; overflow-y: auto; }
+
+.ssy-drawer-section {
+  padding: 1rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+.ssy-drawer-section:last-child { border-bottom: none; }
+
+.ssy-drawer-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  margin-bottom: 0.75rem;
+}
+
+.ssy-drawer-search-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  color: #6b7280;
+  background: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.15s;
+  text-align: left;
+}
+.ssy-drawer-search-btn:hover { background: #f9fafb; }
+
+.ssy-drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.ssy-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s;
+  border: 1px solid transparent;
+}
+.ssy-drawer-link:hover { background: #f9fafb; color: #374151; }
+
+/* ── Docusaurus sidebar overlay ── */
+.navbar-sidebar,
+.navbar-sidebar__backdrop {
+  display: none !important;
+}

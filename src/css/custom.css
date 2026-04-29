@@ -618,6 +618,17 @@ html[data-theme="light"] .darkTheme {
     margin-left: 0rem !important;
   }
 }
+/* ── Custom Navbar: offset page content below fixed navbar (4rem) ── */
+.main-wrapper {
+  padding-top: 4rem !important;
+}
+
+/* ── Custom Navbar: hide Docusaurus sidebar overlay (dummy .navbar is rendered via JSX with inline style) ── */
+.navbar-sidebar,
+.navbar-sidebar__backdrop {
+  display: none !important;
+}
+
 /* Hide the sidebar */
 div[class^='docSidebarContainer'] {
   display: none;
@@ -625,13 +636,13 @@ div[class^='docSidebarContainer'] {
 .pagination-nav {
   display: none;
 }
-/* 隱藏側邊欄 */
+/* 隱��側邊欄 */
 /* 隱藏側邊欄 */
 .theme-doc-sidebar-container {
     display: none;
 }
 
-/* 擴展內容區域的寬度 */
+/* ��展內容區域的寬度 */
 .main-wrapper {
     margin-left: 0;
 }
