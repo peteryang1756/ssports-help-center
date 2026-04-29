@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import SearchBar from '@theme/SearchBar';
 import './navbar.css';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
   const [scrolled, setScrolled] = useState(false);
-
-  const searchInputRef = useRef(null);
+  const searchBarRef = useRef(null);
 
   // Header shadow on scroll
   useEffect(() => {
@@ -22,33 +20,22 @@ export default function Navbar() {
     return () => document.body.classList.remove('ssy-no-scroll');
   }, [mobileOpen]);
 
-  // Focus search input when modal opens
-  useEffect(() => {
-    if (searchOpen) {
-      const t = setTimeout(() => searchInputRef.current?.focus(), 80);
-      return () => clearTimeout(t);
-    }
-  }, [searchOpen]);
-
-  // Close on Escape
+  // Close drawer on Escape
   useEffect(() => {
     const handleKey = (e) => {
-      if (e.key === 'Escape') {
-        setSearchOpen(false);
-        setMobileOpen(false);
-      }
+      if (e.key === 'Escape') setMobileOpen(false);
     };
     document.addEventListener('keydown', handleKey);
     return () => document.removeEventListener('keydown', handleKey);
   }, []);
 
+  // Trigger the hidden SearchBar button click to open Algolia DocSearch
   const openSearch = () => {
     setMobileOpen(false);
-    setSearchOpen(true);
-  };
-  const closeSearch = () => {
-    setSearchOpen(false);
-    setSearchValue('');
+    setTimeout(() => {
+      const btn = searchBarRef.current?.querySelector('button');
+      btn?.click();
+    }, 50);
   };
 
   return (
@@ -76,17 +63,20 @@ export default function Navbar() {
           {/* Desktop nav */}
           <nav className="ssy-desktop-nav">
             <a href="https://sysports.de/support" className="ssy-nav-link">支援中心首頁</a>
-            <a href="https://support.sysports.de/open.php" target="_blank" rel="noreferrer" className="ssy-nav-link">建立新案件</a>
-            <a href="https://support.sysports.de/view.php" target="_blank" rel="noreferrer" className="ssy-nav-link">案件狀態查詢</a>
+            <a href="https://support.sysports.de/open.php" className="ssy-nav-link">建立新案件</a>
+            <a href="https://support.sysports.de/view.php" className="ssy-nav-link">案件狀態查詢</a>
           </nav>
 
-          {/* Desktop search */}
+          {/* Desktop search — hidden SearchBar provides the Algolia trigger */}
           <div className="ssy-desktop-search">
             <button className="ssy-icon-btn" aria-label="搜尋" onClick={openSearch}>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="10" cy="10" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
             </button>
+            <div ref={searchBarRef} style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: 0, height: 0, overflow: 'hidden' }}>
+              <SearchBar />
+            </div>
           </div>
 
           {/* Mobile controls */}
@@ -137,55 +127,14 @@ export default function Navbar() {
               <div className="ssy-drawer-label">支援中心</div>
               <div className="ssy-drawer-links">
                 <a href="https://sysports.de/support" className="ssy-drawer-link">支援中心首頁</a>
-                <a href="https://support.sysports.de/open.php" target="_blank" rel="noreferrer" className="ssy-drawer-link">建立新案件</a>
-                <a href="https://support.sysports.de/view.php" target="_blank" rel="noreferrer" className="ssy-drawer-link">案件狀態查詢</a>
+                <a href="https://support.sysports.de/open.php" className="ssy-drawer-link">建立新案件</a>
+                <a href="https://support.sysports.de/view.php" className="ssy-drawer-link">案件狀態查詢</a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── Search Modal ── */}
-      <div
-        className={`ssy-search-modal${searchOpen ? ' open' : ''}`}
-        onClick={(e) => { if (e.target === e.currentTarget) closeSearch(); }}
-      >
-        <div className="ssy-search-box">
-          <div className="ssy-search-input-row">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="10" cy="10" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <input
-              ref={searchInputRef}
-              type="text"
-              className="ssy-search-input"
-              placeholder="搜尋支援中心內容..."
-              autoComplete="off"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-            />
-            <button className="ssy-icon-btn" aria-label="關閉搜尋" onClick={closeSearch}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-          </div>
-          {searchValue.trim() && (
-            <div className="ssy-search-results-preview">
-              <div className="ssy-search-results-label">搜尋結果（展示）</div>
-              <a href="#" className="ssy-search-result-item">
-                <div className="ssy-search-result-title">{`「${searchValue}」相關支援案件`}</div>
-                <div className="ssy-search-result-sub">顯示目前可用的幫助文章與指引</div>
-              </a>
-              <a href="#" className="ssy-search-result-item">
-                <div className="ssy-search-result-title">{`新手操作：${searchValue}`}</div>
-                <div className="ssy-search-result-sub">常見問題與流程指引</div>
-              </a>
-            </div>
-          )}
-          <div className="ssy-search-hint">搜尋結果僅為示意顯示。</div>
-        </div>
-      </div>
     </>
   );
 }
