@@ -50,6 +50,9 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Dummy element so Docusaurus TOC scroll-spy querySelector('.navbar') never returns null */}
+      <nav className="navbar" aria-hidden="true" style={{ height: 0, minHeight: 0, overflow: 'hidden', visibility: 'hidden', padding: 0, border: 'none', margin: 0 }} />
+
       {/* ── Main Header ── */}
       <header id="ssy-main-header">
         <div className="ssy-header-inner">

@@ -618,15 +618,7 @@ html[data-theme="light"] .darkTheme {
     margin-left: 0rem !important;
   }
 }
-/* ── Custom Navbar: hide Docusaurus default navbar (keep in DOM so clientHeight reads as 0, not null) ── */
-.navbar {
-  height: 0 !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-  visibility: hidden !important;
-  padding: 0 !important;
-  border: none !important;
-}
+/* ── Custom Navbar: hide Docusaurus sidebar overlay (dummy .navbar is rendered via JSX with inline style) ── */
 .navbar-sidebar,
 .navbar-sidebar__backdrop {
   display: none !important;
