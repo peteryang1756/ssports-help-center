@@ -618,8 +618,15 @@ html[data-theme="light"] .darkTheme {
     margin-left: 0rem !important;
   }
 }
-/* ── Custom Navbar: hide Docusaurus default navbar ── */
-.navbar,
+/* ── Custom Navbar: hide Docusaurus default navbar (keep in DOM so clientHeight reads as 0, not null) ── */
+.navbar {
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+  padding: 0 !important;
+  border: none !important;
+}
 .navbar-sidebar,
 .navbar-sidebar__backdrop {
   display: none !important;
@@ -638,7 +645,7 @@ div[class^='docSidebarContainer'] {
     display: none;
 }
 
-/* 擴展內容區域的寬度 */
+/* ��展內容區域的寬度 */
 .main-wrapper {
     margin-left: 0;
 }
