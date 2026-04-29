@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import './navbar.css';
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [sportsOpen, setSportsOpen] = useState(false);
   const [supportPanelOpen, setSupportPanelOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -13,13 +12,6 @@ export default function Navbar() {
   const sportsTriggerRef = useRef(null);
   const sportsDropdownRef = useRef(null);
   const hideTimerRef = useRef(null);
-
-  // Scroll shadow
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Lock body scroll when mobile drawer or search is open
   useEffect(() => {
@@ -59,7 +51,7 @@ export default function Navbar() {
   return (
     <>
       {/* ── Main Header ── */}
-      <header id="ssy-main-header" className={scrolled ? 'ssy-shadow' : ''}>
+      <header id="ssy-main-header">
         <div className="ssy-header-inner">
           {/* Logo */}
           <a href="/" className="ssy-logo-link">

@@ -618,12 +618,6 @@ html[data-theme="light"] .darkTheme {
     margin-left: 0rem !important;
   }
 }
-/* ── Custom Navbar: offset page content below both fixed bars (4rem header + 2.75rem sub-navbar) ── */
-.main-wrapper {
-  padding-top: 6.75rem !important;
-  margin-top: 0 !important;
-}
-
 /* ── Custom Navbar: hide Docusaurus default navbar ── */
 .navbar,
 .navbar-sidebar,
