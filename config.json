@@ -1,7 +1,7 @@
 {
-    "index_name": "help",
+    "index_name": "help-md",
     "start_urls": [
-      "https://ssports-site-git-main-ssangyongsportsorg.vercel.app/support"
+      "https://sysports.de/support"
     ],
     "sitemap_urls": [
       "https://ssports-site-git-main-ssangyongsportsorg.vercel.app/sitemap.xml"
