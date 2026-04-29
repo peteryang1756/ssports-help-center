@@ -242,10 +242,7 @@ h4 {
   font-size: 1rem !important;
 }
 
-/* NavBar */
-.navbar {
-  font-size: 0.95rem;
-}
+/* NavBar — handled by src/theme/Navbar/styles.css */
 
 .navbar-github-link:before {
   content: "";

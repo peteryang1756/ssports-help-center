@@ -2,6 +2,22 @@
 
 body.no-scroll { overflow: hidden; }
 
+/* ── Strip Docusaurus's own .navbar wrapper so it becomes a transparent passthrough ── */
+.navbar.navbar--fixed-top {
+  all: unset !important;
+  display: block !important;
+  position: static !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  height: auto !important;
+}
+/* Also kill the Docusaurus navbar height CSS variable offset */
+:root {
+  --ifm-navbar-height: 0px !important;
+}
+
 /* ── Header ── */
 #main-header {
   position: fixed;
@@ -61,6 +77,7 @@ body.no-scroll { overflow: hidden; }
   border: none;
   cursor: pointer;
   white-space: nowrap;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 .sub-nav-trigger .chevron-sm {
   transition: transform 0.22s ease;
@@ -144,6 +161,7 @@ body.no-scroll { overflow: hidden; }
   transition: background 0.15s;
   white-space: nowrap;
   text-decoration: none;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 .nav-btn { gap: 0.25rem; }
 .nav-btn:hover, .nav-link:hover { background: #f3f4f6; color: #4b5563; }
@@ -236,6 +254,7 @@ body.no-scroll { overflow: hidden; }
   border: 1px solid #d1d5db; border-radius: 0.375rem;
   padding: 0.5rem 0.75rem; color: #6b7280; background: none;
   cursor: pointer; font-size: 0.875rem; transition: background 0.15s;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 .drawer-search-btn:hover { background: #f9fafb; }
 .drawer-links { display: flex; flex-direction: column; gap: 0.25rem; }
@@ -271,6 +290,7 @@ body.no-scroll { overflow: hidden; }
   flex: 1; outline: none; border: none;
   padding: 0.875rem 0.5rem; font-size: 1rem;
   color: #1f2937; background: transparent;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 .search-hint {
   padding: 0.75rem 1rem; background: #f9fafb;
@@ -278,7 +298,9 @@ body.no-scroll { overflow: hidden; }
 }
 #searchResultsPreview {
   max-height: 20rem; overflow-y: auto; border-top: 1px solid #e5e7eb;
+  display: none;
 }
+#searchResultsPreview.visible { display: block; }
 .search-results-label {
   font-size: 0.875rem; font-weight: 500;
   padding: 0.5rem 0.75rem; background: #f3f4f6;
@@ -292,14 +314,7 @@ body.no-scroll { overflow: hidden; }
 .search-result-title { font-weight: 500; font-size: 0.875rem; color: #111827; }
 .search-result-sub   { font-size: 0.75rem; color: #6b7280; margin-top: 0.15rem; }
 
-/* ── Docusaurus overrides ── */
-
-/* Hide the default Docusaurus navbar to prevent duplication */
-.navbar { display: none !important; }
-
-/* Offset page content below our two fixed bars (4rem + 2.75rem = 6.75rem) */
-.main-wrapper,
-[class*='docMainContainer'],
-[class*='docItemContainer'] {
-  padding-top: 6.75rem !important;
+/* ── Offset page content below our two fixed bars (4rem header + 2.75rem sub = 6.75rem) ── */
+.main-wrapper {
+  margin-top: 6.75rem !important;
 }

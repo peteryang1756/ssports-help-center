@@ -308,19 +308,17 @@ export default function Navbar() {
               </svg>
             </button>
           </div>
-          {searchVal.trim() && (
-            <div id="searchResultsPreview">
-              <div className="search-results-label">搜尋結果（展示）</div>
-              <a href="#" className="search-result-item">
-                <div className="search-result-title">{'關於「'}{searchVal}{'」的最新論壇文章'}</div>
-                <div className="search-result-sub">雙龍體育官方消息</div>
-              </a>
-              <a href="#" className="search-result-item">
-                <div className="search-result-title">{'幫助中心：'}{searchVal}{' 相關教學'}</div>
-                <div className="search-result-sub">使用說明與常見問題</div>
-              </a>
-            </div>
-          )}
+          <div id="searchResultsPreview" className={searchVal.trim() ? 'visible' : ''}>
+            <div className="search-results-label">搜尋結果（展示）</div>
+            <a href="#" className="search-result-item">
+              <div className="search-result-title">{'關於「'}{searchVal}{'」的最新論壇文章'}</div>
+              <div className="search-result-sub">雙龍體育官方消息</div>
+            </a>
+            <a href="#" className="search-result-item">
+              <div className="search-result-title">{'幫助中心：'}{searchVal}{' 相關教學'}</div>
+              <div className="search-result-sub">使用說明與常見問題</div>
+            </a>
+          </div>
           <div className="search-hint">搜尋結果僅為示意顯示。</div>
         </div>
       </div>
