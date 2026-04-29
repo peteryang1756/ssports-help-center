@@ -247,6 +247,15 @@ h4 {
   font-size: 0.95rem;
 }
 
+/* Custom Navbar offset — push content below the fixed 4rem header */
+:root {
+  --ifm-navbar-height: 4rem;
+}
+
+.main-wrapper {
+  padding-top: var(--ifm-navbar-height);
+}
+
 .navbar-github-link:before {
   content: "";
   width: 24px;
