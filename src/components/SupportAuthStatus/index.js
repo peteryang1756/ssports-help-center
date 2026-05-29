@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 export const SUPPORT_ORIGIN = 'https://support.sysports.de';
-export const SUPPORT_LOGIN_URL = `${SUPPORT_ORIGIN}/login.php`;
+export const SUPPORT_LOGIN_URL = `${SUPPORT_ORIGIN}/login.php?do=ext&bk=oauth2.user.p1i1`;
 export const SUPPORT_TICKETS_URL = `${SUPPORT_ORIGIN}/tickets.php`;
 export const SUPPORT_BRIDGE_URL = `${SUPPORT_ORIGIN}/auth-bridge.html`;
 
