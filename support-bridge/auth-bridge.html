@@ -56,12 +56,11 @@
     var name = getFirstText(doc, [
       '#client-name',
       '.client-name',
+      '.profile-menu-name',
       '.user-name',
-      '.username',
-      '.account-name',
       '[data-user-name]',
-      'a[href*="profile"]',
-      'a[href*="account"]'
+      '.username',
+      '.account-name'
     ]);
 
     if (logoutLink || logoutText) {

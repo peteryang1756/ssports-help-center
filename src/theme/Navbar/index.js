@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import SearchBar from '@theme/SearchBar';
 import {
   SUPPORT_LOGIN_URL,
+  SUPPORT_ORIGIN,
   SUPPORT_TICKETS_URL,
   SupportAuthBridgeFrame,
   useSupportAuthStatus,
@@ -10,8 +11,10 @@ import './navbar.css';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const searchBarRef = useRef(null);
+  const profileRef = useRef(null);
   const supportAuth = useSupportAuthStatus();
 
   const profileInitial = useMemo(() => {
@@ -32,38 +35,82 @@ export default function Navbar() {
     return () => document.body.classList.remove('ssy-no-scroll');
   }, [mobileOpen]);
 
-  // Close drawer on Escape
+  // Close overlays on Escape / outside click
   useEffect(() => {
     const handleKey = (e) => {
-      if (e.key === 'Escape') setMobileOpen(false);
+      if (e.key === 'Escape') {
+        setMobileOpen(false);
+        setProfileOpen(false);
+      }
+    };
+    const handlePointer = (e) => {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setProfileOpen(false);
+      }
     };
     document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
+    document.addEventListener('pointerdown', handlePointer);
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+      document.removeEventListener('pointerdown', handlePointer);
+    };
   }, []);
 
   // Trigger the hidden SearchBar button click to open Algolia DocSearch
   const openSearch = () => {
     setMobileOpen(false);
+    setProfileOpen(false);
     setTimeout(() => {
       const btn = searchBarRef.current?.querySelector('button');
       btn?.click();
     }, 50);
   };
 
-  const authControl = supportAuth.status === 'authenticated' ? (
-    <a
-      className="ssy-profile-wrap"
-      href={SUPPORT_LOGIN_URL}
-      aria-label={supportAuth.user?.name ? `客服帳號：${supportAuth.user.name}` : '客服帳號'}
-    >
-      <span className="ssy-profile-btn">
+  const logoutUrl = supportAuth.logoutUrl || `${SUPPORT_ORIGIN}/logout.php`;
+
+  const profileMenu = supportAuth.status === 'authenticated' ? (
+    <div className="ssy-profile-menu" role="menu">
+      <div className="ssy-profile-menu-label">
+        <div className="ssy-profile-menu-name">{supportAuth.user?.name || '客服帳號'}</div>
+        <div className="ssy-profile-menu-email">support.sysports.de</div>
+      </div>
+      <div className="ssy-profile-menu-separator" />
+      <a className="ssy-profile-menu-item" href={`${SUPPORT_ORIGIN}/account.php`} role="menuitem">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>帳戶設定</span>
+      </a>
+      <a className="ssy-profile-menu-item" href={SUPPORT_TICKETS_URL} role="menuitem">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+        <span>我的工單</span>
+      </a>
+      <div className="ssy-profile-menu-separator" />
+      <a className="ssy-profile-menu-item ssy-profile-menu-danger" href={logoutUrl} role="menuitem">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+        <span>登出</span>
+      </a>
+    </div>
+  ) : null;
+
+  const authControl = supportAuth.status === 'checking' ? (
+    <span className="ssy-auth-loading" aria-label="正在確認客服登入狀態" title="正在確認客服登入狀態" />
+  ) : supportAuth.status === 'authenticated' ? (
+    <div className="ssy-profile-wrap" ref={profileRef}>
+      <button
+        className="ssy-profile-btn"
+        type="button"
+        aria-label={supportAuth.user?.name ? `客服帳號：${supportAuth.user.name}` : '客服帳號'}
+        aria-haspopup="menu"
+        aria-expanded={profileOpen}
+        onClick={() => setProfileOpen((open) => !open)}
+      >
         {supportAuth.user?.avatar ? (
           <img src={supportAuth.user.avatar} alt="" />
         ) : (
           <span>{profileInitial}</span>
         )}
-      </span>
-    </a>
+      </button>
+      {profileOpen ? profileMenu : null}
+    </div>
   ) : (
     <a className="ssy-auth-icon-btn" href={SUPPORT_LOGIN_URL} aria-label="登入客服系統" title="登入客服系統">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

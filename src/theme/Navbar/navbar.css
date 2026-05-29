@@ -112,6 +112,7 @@
 }
 .ssy-icon-btn:hover { background: #f3f4f6; }
 
+.ssy-auth-loading,
 .ssy-auth-icon-btn,
 .ssy-profile-btn {
   display: inline-flex;
@@ -148,6 +149,18 @@
   object-fit: cover;
 }
 .ssy-profile-btn span { line-height: 1; }
+
+.ssy-auth-loading {
+  border: 2px solid #d1d5db;
+  border-top-color: #4b5563;
+  cursor: default;
+  animation: ssy-spin 0.8s linear infinite;
+}
+.ssy-auth-loading:hover {
+  background: transparent;
+  transform: none;
+}
+@keyframes ssy-spin { to { transform: rotate(360deg); } }
 
 .ssy-profile-menu {
   position: absolute;
