@@ -1,11 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import SearchBar from '@theme/SearchBar';
+import {
+  SUPPORT_LOGIN_URL,
+  SUPPORT_TICKETS_URL,
+  SupportAuthBridgeFrame,
+  useSupportAuthStatus,
+} from '../../components/SupportAuthStatus';
 import './navbar.css';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const searchBarRef = useRef(null);
+  const supportAuth = useSupportAuthStatus();
+
+  const profileInitial = useMemo(() => {
+    const name = supportAuth.user?.name || 'U';
+    return name.trim().charAt(0).toUpperCase() || 'U';
+  }, [supportAuth.user]);
 
   // Header shadow on scroll
   useEffect(() => {
@@ -47,6 +59,8 @@ export default function Navbar() {
         style={{ height: 0, minHeight: 0, overflow: 'hidden', visibility: 'hidden', padding: 0, border: 'none', margin: 0 }}
       />
 
+      <SupportAuthBridgeFrame />
+
       {/* ── Main Header ── */}
       <header id="ssy-main-header" className={scrolled ? 'ssy-scrolled' : ''}>
         <div className="ssy-header-inner">
@@ -74,6 +88,17 @@ export default function Navbar() {
                 <circle cx="10" cy="10" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
             </button>
+            {supportAuth.status === 'authenticated' ? (
+              <a className="ssy-profile-btn" href={SUPPORT_TICKETS_URL} aria-label={supportAuth.user?.name ? `客服帳號：${supportAuth.user.name}` : '客服帳號'} title={supportAuth.user?.name || '客服帳號'}>
+                {supportAuth.user?.avatar ? (
+                  <img src={supportAuth.user.avatar} alt="" />
+                ) : (
+                  <span>{profileInitial}</span>
+                )}
+              </a>
+            ) : (
+              <a className="ssy-login-btn" href={SUPPORT_LOGIN_URL}>登入</a>
+            )}
             <div ref={searchBarRef} style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: 0, height: 0, overflow: 'hidden' }}>
               <SearchBar />
             </div>
@@ -81,6 +106,17 @@ export default function Navbar() {
 
           {/* Mobile controls */}
           <div className="ssy-mobile-controls">
+            {supportAuth.status === 'authenticated' ? (
+              <a className="ssy-profile-btn" href={SUPPORT_TICKETS_URL} aria-label={supportAuth.user?.name ? `客服帳號：${supportAuth.user.name}` : '客服帳號'} title={supportAuth.user?.name || '客服帳號'}>
+                {supportAuth.user?.avatar ? (
+                  <img src={supportAuth.user.avatar} alt="" />
+                ) : (
+                  <span>{profileInitial}</span>
+                )}
+              </a>
+            ) : (
+              <a className="ssy-login-btn ssy-login-btn-mobile" href={SUPPORT_LOGIN_URL}>登入</a>
+            )}
             <button className="ssy-icon-btn" aria-label="搜尋" onClick={openSearch}>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="10" cy="10" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -129,6 +165,11 @@ export default function Navbar() {
                 <a href="https://sysports.de/support" className="ssy-drawer-link">支援中心首頁</a>
                 <a href="https://support.sysports.de/open.php" className="ssy-drawer-link">建立新案件</a>
                 <a href="https://support.sysports.de/view.php" className="ssy-drawer-link">案件狀態查詢</a>
+                {supportAuth.status === 'authenticated' ? (
+                  <a href={SUPPORT_TICKETS_URL} className="ssy-drawer-link">我的客服帳號</a>
+                ) : (
+                  <a href={SUPPORT_LOGIN_URL} className="ssy-drawer-link ssy-drawer-login-link">登入客服系統</a>
+                )}
               </div>
             </div>
           </div>
