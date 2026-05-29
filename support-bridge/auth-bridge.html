@@ -65,7 +65,9 @@
     ]);
 
     if (logoutLink || logoutText) {
-      post({ status: 'authenticated', user: name ? { name: name } : null });
+      var logoutUrl = logoutLink ? logoutLink.getAttribute('href') : '/logout.php';
+      try { logoutUrl = new URL(logoutUrl, location.origin).href; } catch (e) {}
+      post({ status: 'authenticated', user: name ? { name: name } : null, logoutUrl: logoutUrl });
       return;
     }
 

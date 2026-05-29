@@ -21,6 +21,7 @@ export function useSupportAuthStatus() {
           status: data.status,
           user: data.user || null,
           message: data.message || '',
+          logoutUrl: data.logoutUrl || '',
         });
       }
     }
