@@ -2,7 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import styles from './styles.module.css';
 
 const SUPPORT_ORIGIN = 'https://support.sysports.de';
-const BRIDGE_ORIGIN = SUPPORT_ORIGIN;
+const BRIDGE_ORIGIN = 'https://storage.sysports.de';
 const BRIDGE_URL = `${BRIDGE_ORIGIN}/auth-bridge.html`;
 const LOGIN_URL = `${SUPPORT_ORIGIN}/login.php?do=ext&bk=oauth2.user.p1i1`;
 const TICKETS_URL = `${SUPPORT_ORIGIN}/tickets.php`;

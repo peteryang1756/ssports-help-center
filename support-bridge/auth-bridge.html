@@ -44,7 +44,8 @@
     return '';
   }
 
-  function parseTicketPage(doc) {
+  function parseTicketPage(html) {
+    var doc = new DOMParser().parseFromString(html, 'text/html');
     var pageText = textOf(doc);
     var logoutLink = doc.querySelector('a[href*="logout"], a[href*="signout"], a[href*="logout.php"]');
     var loginForm = doc.querySelector('form[action*="login"], a[href*="login.php?do=ext"], a[href$="/login.php"], a[href="/login.php"]');
@@ -82,7 +83,16 @@
     return;
   }
 
-  parseTicketPage(document);
+  fetch('/tickets.php', {
+    credentials: 'include',
+    cache: 'no-store',
+    headers: { 'X-Requested-With': 'sysports-support-auth-bridge' }
+  })
+    .then(function (response) { return response.text(); })
+    .then(parseTicketPage)
+    .catch(function (error) {
+      post({ status: 'error', message: error && error.message ? error.message : 'Unable to check support login status' });
+    });
 }());
 </script>
 </body>
