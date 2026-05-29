@@ -208,11 +208,6 @@ export default function Navbar() {
                 <a href="https://sysports.de/support" className="ssy-drawer-link">支援中心首頁</a>
                 <a href="https://support.sysports.de/open.php" className="ssy-drawer-link">建立新案件</a>
                 <a href="https://support.sysports.de/view.php" className="ssy-drawer-link">案件狀態查詢</a>
-                {supportAuth.status === 'authenticated' ? (
-                  <a href={SUPPORT_TICKETS_URL} className="ssy-drawer-link">我的客服帳號</a>
-                ) : (
-                  <a href={SUPPORT_LOGIN_URL} className="ssy-drawer-link ssy-drawer-login-link">登入客服系統</a>
-                )}
               </div>
             </div>
           </div>
