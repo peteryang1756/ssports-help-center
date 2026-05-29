@@ -9,6 +9,7 @@ import ExploreContent from "../components/ExploreContent/ExploreContent";
 //import DiscoverYourPath from "../components/DiscoverYourPath/DiscoverYourPath";
 import { DocSearch } from '@docsearch/react'
 import ChatwootWidget from '../components/ChatwootWidget'
+import SupportAuthStatus from '../components/SupportAuthStatus'
 
 
 function Home() {
@@ -30,6 +31,7 @@ function Home() {
           </div>          </div>
         </div>
       </header>
+      <SupportAuthStatus />
       <hr></hr>
       <ExploreContent />
            <ChatwootWidget />

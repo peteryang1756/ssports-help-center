@@ -1,0 +1,126 @@
+.card {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(49, 98, 172, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin: -2.25rem auto 2rem;
+  max-width: 980px;
+  padding: 1.1rem 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+.copy {
+  align-items: center;
+  display: flex;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.kicker {
+  color: #64748b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.18rem;
+  text-transform: uppercase;
+}
+
+.title {
+  color: #0f172a;
+  font-size: 1.18rem !important;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.description {
+  color: #475569;
+  font-size: 0.92rem;
+  margin: 0.28rem 0 0;
+}
+
+.dot {
+  border-radius: 999px;
+  box-shadow: 0 0 0 6px rgba(148, 163, 184, 0.16);
+  display: inline-block;
+  flex: 0 0 auto;
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.pending { background: #94a3b8; }
+.signedIn { background: #16a34a; box-shadow: 0 0 0 6px rgba(22, 163, 74, 0.16); }
+.signedOut { background: #f59e0b; box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.18); }
+
+.actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: flex-end;
+}
+
+.primaryButton,
+.secondaryButton {
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.65rem 1rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+
+.primaryButton {
+  background: #3162ac;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(49, 98, 172, 0.22);
+}
+
+.primaryButton:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.secondaryButton {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.secondaryButton:hover {
+  color: #0f172a;
+  transform: translateY(-1px);
+}
+
+.bridgeFrame {
+  border: 0;
+  height: 1px;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    align-items: stretch;
+    flex-direction: column;
+    margin: 1rem 1rem 1.5rem;
+  }
+
+  .actions {
+    justify-content: stretch;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}

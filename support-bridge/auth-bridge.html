@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Support auth bridge</title>
+</head>
+<body>
+<script>
+(function () {
+  var ALLOWED_PARENT_ORIGINS = [
+    'https://sysports.de',
+    'https://www.sysports.de',
+    'http://localhost:3000',
+    'http://localhost:8000'
+  ];
+
+  function getParentOrigin() {
+    try {
+      if (document.referrer) return new URL(document.referrer).origin;
+    } catch (e) {}
+    return '*';
+  }
+
+  var parentOrigin = getParentOrigin();
+  var targetOrigin = ALLOWED_PARENT_ORIGINS.indexOf(parentOrigin) >= 0 ? parentOrigin : '*';
+
+  function post(payload) {
+    window.parent.postMessage(Object.assign({
+      source: 'sysports-support-auth-bridge',
+      version: 1
+    }, payload), targetOrigin);
+  }
+
+  function textOf(doc) {
+    return (doc.body && doc.body.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function getFirstText(doc, selectors) {
+    for (var i = 0; i < selectors.length; i += 1) {
+      var el = doc.querySelector(selectors[i]);
+      if (el && el.textContent && el.textContent.trim()) return el.textContent.trim();
+    }
+    return '';
+  }
+
+  function parseTicketPage(doc) {
+    var pageText = textOf(doc);
+    var logoutLink = doc.querySelector('a[href*="logout"], a[href*="signout"], a[href*="logout.php"]');
+    var loginForm = doc.querySelector('form[action*="login"], a[href*="login.php?do=ext"], a[href$="/login.php"], a[href="/login.php"]');
+    var loginText = /登入支援中心|使用雙龍體育登入|請使用雙龍體育帳號登入/.test(pageText);
+    var logoutText = /登出|退出|Logout|Sign out/i.test(pageText);
+
+    var name = getFirstText(doc, [
+      '#client-name',
+      '.client-name',
+      '.user-name',
+      '.username',
+      '.account-name',
+      '[data-user-name]',
+      'a[href*="profile"]',
+      'a[href*="account"]'
+    ]);
+
+    if (logoutLink || logoutText) {
+      post({ status: 'authenticated', user: name ? { name: name } : null });
+      return;
+    }
+
+    if (loginForm || loginText) {
+      post({ status: 'anonymous' });
+      return;
+    }
+
+    post({ status: 'unknown' });
+  }
+
+  post({ status: 'checking' });
+
+  if (location.hostname !== 'support.sysports.de') {
+    post({ status: 'error', message: 'Bridge must be served from support.sysports.de to access the support session.' });
+    return;
+  }
+
+  parseTicketPage(document);
+}());
+</script>
+</body>
+</html>
