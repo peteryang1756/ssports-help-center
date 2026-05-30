@@ -14,6 +14,7 @@ export default function Navbar() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const searchBarRef = useRef(null);
+  const profileRef = useRef(null);
   const supportAuth = useSupportAuthStatus();
 
   const profileInitial = useMemo(() => {
@@ -43,7 +44,7 @@ export default function Navbar() {
       }
     };
     const handlePointer = (e) => {
-      if (!e.target.closest?.('.ssy-profile-wrap')) {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
         setProfileOpen(false);
       }
     };
@@ -90,10 +91,10 @@ export default function Navbar() {
     </div>
   ) : null;
 
-  const renderAuthControl = () => supportAuth.status === 'checking' ? (
+  const authControl = supportAuth.status === 'checking' ? (
     <span className="ssy-auth-loading" aria-label="正在確認客服登入狀態" title="正在確認客服登入狀態" />
   ) : supportAuth.status === 'authenticated' ? (
-    <div className="ssy-profile-wrap">
+    <div className="ssy-profile-wrap" ref={profileRef}>
       <button
         className="ssy-profile-btn"
         type="button"
@@ -136,7 +137,7 @@ export default function Navbar() {
 
           {/* Logo group */}
           <div className="ssy-logo-group">
-            <a href="https://sysports.de/support" id="ssy-logo-link">
+            <a href="/" id="ssy-logo-link">
               <img src="https://i.pixi.mg/i/f456f14c64ca7bf7b7c84040.png" alt="雙龍體育" />
             </a>
             <div className="ssy-logo-divider" />
@@ -157,7 +158,7 @@ export default function Navbar() {
                 <circle cx="10" cy="10" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
             </button>
-            {renderAuthControl()}
+            {authControl}
             <div ref={searchBarRef} style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: 0, height: 0, overflow: 'hidden' }}>
               <SearchBar />
             </div>
@@ -165,7 +166,7 @@ export default function Navbar() {
 
           {/* Mobile controls */}
           <div className="ssy-mobile-controls">
-            {renderAuthControl()}
+            {authControl}
             <button className="ssy-icon-btn" aria-label="選單" onClick={() => setMobileOpen(true)}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" />
@@ -217,4 +218,4 @@ export default function Navbar() {
 
     </>
   );
-}
+            }
