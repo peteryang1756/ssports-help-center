@@ -412,8 +412,22 @@ if (($lang = Internationalization::getCurrentLanguage())) {
             </div>
 
             <div class="mobile-controls">
-                <?php if ($thisclient && is_object($thisclient) && $thisclient->isValid() && !$thisclient->isGuest()) { ?>
-                    <div class="profile-wrap"><button class="profile-btn" type="button" aria-label="客服帳號：<?php echo Format::htmlchars($thisclient->getName()); ?>" aria-haspopup="menu" aria-expanded="false"><span><?php echo Format::htmlchars(mb_strtoupper(mb_substr($thisclient->getName(), 0, 1, 'UTF-8'), 'UTF-8')) ?: 'U'; ?></span></button></div>
+                <?php if ($thisclient && is_object($thisclient) && $thisclient->isValid() && !$thisclient->isGuest()) {
+                    $mobile_client_name = Format::htmlchars($thisclient->getName());
+                    $mobile_client_email = Format::htmlchars($thisclient->getEmail());
+                    $mobile_client_initial = Format::htmlchars(mb_strtoupper(mb_substr($thisclient->getName(), 0, 1, 'UTF-8'), 'UTF-8'));
+                ?>
+                    <div class="profile-wrap">
+                        <button class="profile-btn" type="button" aria-label="客服帳號：<?php echo $mobile_client_name; ?>" aria-haspopup="menu" aria-expanded="false"><span><?php echo $mobile_client_initial ?: 'U'; ?></span></button>
+                        <div class="profile-menu" role="menu">
+                            <div class="profile-menu-label"><div class="profile-menu-name"><?php echo $mobile_client_name; ?></div><div class="profile-menu-email"><?php echo $mobile_client_email ?: 'support.sysports.de'; ?></div></div>
+                            <div class="profile-menu-separator"></div>
+                            <a class="profile-menu-item" href="/account.php" role="menuitem"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="7" r="4"></circle></svg><span>帳戶設定</span></a>
+                            <a class="profile-menu-item" href="/tickets.php" role="menuitem"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path></svg><span>我的工單</span></a>
+                            <div class="profile-menu-separator"></div>
+                            <a class="profile-menu-item profile-menu-danger" href="<?php echo $signout_url; ?>" role="menuitem"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path></svg><span>登出</span></a>
+                        </div>
+                    </div>
                 <?php } else { ?>
                     <a href="<?php echo $signin_url; ?>" class="auth-icon-btn" aria-label="登入客服系統" title="登入客服系統"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
                 <?php } ?>
