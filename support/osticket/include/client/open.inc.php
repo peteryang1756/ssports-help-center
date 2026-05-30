@@ -308,14 +308,30 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
 (function(){
   function setFieldValue(el, value, force) {
     if (!el || !value) return;
+    if (el.dataset && el.dataset.openUserModified === '1') return;
+
     var current = (el.value || '').trim();
+    var wanted = (value || '').trim();
     var wasAutoPrefilled = el.dataset && el.dataset.openPrefilled === '1';
     if (!force && current && !wasAutoPrefilled) return;
+    if (current === wanted && wasAutoPrefilled) return;
 
     el.value = value;
     if (el.dataset) el.dataset.openPrefilled = '1';
     try { el.dispatchEvent(new Event('input', { bubbles: true })); } catch(e) {}
     try { el.dispatchEvent(new Event('change', { bubbles: true })); } catch(e) {}
+  }
+
+  function protectField(el) {
+    if (!el || (el.dataset && el.dataset.openPrefillProtected === '1')) return;
+    if (el.dataset) el.dataset.openPrefillProtected = '1';
+    ['input', 'change', 'keydown', 'paste'].forEach(function(type) {
+      el.addEventListener(type, function(event) {
+        if (event && event.isTrusted && el.dataset && el.dataset.openPrefilled === '1') {
+          el.dataset.openUserModified = '1';
+        }
+      }, { passive: true });
+    });
   }
 
   function findSubjectField(root) {
@@ -349,13 +365,16 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
     var shouldForce = !!force || /[?&](subject|description)=/i.test(window.location.search);
 
     if (subject) {
-      setFieldValue(findSubjectField(dynForm), subject, shouldForce);
+      var subjectEl = findSubjectField(dynForm);
+      protectField(subjectEl);
+      setFieldValue(subjectEl, subject, shouldForce);
     }
 
     // Message: textarea inside #dynamic-form (may be richtext/Redactor)
     if (message) {
       var msgEl = dynForm.querySelector('textarea');
       if (msgEl) {
+        protectField(msgEl);
         setFieldValue(msgEl, message, shouldForce);
         // If Redactor already initialized, update via its API
         var $msg = window.jQuery && jQuery(msgEl);
@@ -379,6 +398,19 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
   setTimeout(function(){ applyPrefill(true); }, 1200);
   setTimeout(function(){ applyPrefill(true); }, 2500);
   setTimeout(function(){ applyPrefill(true); }, 5000);
+
+  // OAuth / osTicket dynamic forms can initialize drafts after page load and
+  // clear the field again. Keep the server-provided prefill alive until the
+  // user actually types in the field.
+  var started = Date.now();
+  var keeper = setInterval(function(){
+    applyPrefill(true);
+    if (Date.now() - started > 30000) clearInterval(keeper);
+  }, 500);
+  var dyn = document.getElementById('dynamic-form');
+  if (dyn && window.MutationObserver) {
+    new MutationObserver(function(){ applyPrefill(true); }).observe(dyn, { childList: true, subtree: true });
+  }
 })();
 </script>
 
