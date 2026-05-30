@@ -306,6 +306,42 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
 
 <script>
 (function(){
+  var PREFILL_STORAGE_KEY = 'ssy:open-prefill:v1';
+
+  function readStoredPrefill() {
+    try {
+      var raw = window.localStorage && localStorage.getItem(PREFILL_STORAGE_KEY);
+      if (!raw) return {};
+      var data = JSON.parse(raw);
+      if (!data || !data.ts || Date.now() - data.ts > 60 * 60 * 1000) return {};
+      return data;
+    } catch(e) { return {}; }
+  }
+
+  function rememberPrefill(topic, subject, message) {
+    if (!subject && !message) return;
+    try {
+      localStorage.setItem(PREFILL_STORAGE_KEY, JSON.stringify({
+        ts: Date.now(),
+        topic: topic || '',
+        subject: subject || '',
+        message: message || ''
+      }));
+    } catch(e) {}
+  }
+
+  function getPrefillData() {
+    var topic = document.querySelector('input[name="prefill_topicId"]')?.value || '';
+    var subject = document.querySelector('input[name="prefill_subject"]')?.value || '';
+    var message = document.querySelector('input[name="prefill_message"]')?.value || '';
+    var stored = readStoredPrefill();
+    subject = subject || stored.subject || '';
+    message = message || stored.message || '';
+    topic = topic || stored.topic || '';
+    rememberPrefill(topic, subject, message);
+    return { topic: topic, subject: subject, message: message };
+  }
+
   function setFieldValue(el, value, force) {
     if (!el || !value) return;
     if (el.dataset && el.dataset.openUserModified === '1') return;
@@ -334,40 +370,69 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
     });
   }
 
-  function findSubjectField(root) {
-    if (!root) return null;
+  function uniqueFields(fields) {
+    var seen = [];
+    return fields.filter(function(el) {
+      if (!el || seen.indexOf(el) !== -1) return false;
+      seen.push(el);
+      return true;
+    });
+  }
+
+  function findSubjectFields(root) {
+    if (!root) return [];
+    var fields = [];
 
     // Prefer the field whose label is Issue Summary / 問題摘要. This is more
     // reliable after OAuth redirects because logged-in forms no longer include
     // the contact-information fields, and osTicket dynamic field names are hashes.
     var labels = Array.prototype.slice.call(root.querySelectorAll('label'));
-    for (var i = 0; i < labels.length; i++) {
-      var text = (labels[i].textContent || '').replace(/\s+/g, ' ').trim();
-      if (!/(Issue Summary|問題摘要)/i.test(text)) continue;
-      var id = labels[i].getAttribute('for');
+    labels.forEach(function(label) {
+      var text = (label.textContent || '').replace(/\s+/g, ' ').trim();
+      if (!/(Issue Summary|問題摘要|Summary|Subject|主旨|摘要)/i.test(text)) return;
+      var id = label.getAttribute('for');
       var byId = id && document.getElementById(id);
-      if (byId && byId.matches('input[type="text"], input:not([type]), textarea')) return byId;
-      var near = labels[i].parentElement && labels[i].parentElement.querySelector('input[type="text"], input:not([type]), textarea');
-      if (near) return near;
+      if (byId && byId.matches('input[type="text"], input:not([type]), textarea')) fields.push(byId);
+      var near = label.parentElement && label.parentElement.querySelector('input[type="text"], input:not([type]), textarea');
+      if (near) fields.push(near);
+      var row = label.closest('tr, .form-field, .field, div');
+      var inRow = row && row.querySelector('input[type="text"], input:not([type]), textarea');
+      if (inRow) fields.push(inRow);
+    });
+
+    if (!fields.length) {
+      var allText = Array.prototype.slice.call(root.querySelectorAll('input[type="text"], input:not([type])'));
+      // Avoid contact fields if present in anonymous form.
+      fields = allText.filter(function(el) {
+        var name = (el.name || '').toLowerCase();
+        var id = (el.id || '').toLowerCase();
+        var ac = (el.autocomplete || '').toLowerCase();
+        var label = '';
+        if (el.id) { try { label = (document.querySelector('label[for="' + (window.CSS && CSS.escape ? CSS.escape(el.id) : el.id.replace(/"/g, '\"')) + '"]')?.textContent || '').toLowerCase(); } catch(e) {} }
+        return !/(email|mail|name|phone|tel|姓名|電子|電話)/i.test(name + ' ' + id + ' ' + ac + ' ' + label);
+      });
+      if (!fields.length && allText.length) fields = [allText[allText.length - 1]];
     }
 
-    return root.querySelector('input[type="text"], input:not([type])');
+    return uniqueFields(fields);
   }
 
   function applyPrefill(force) {
-    var subject = document.querySelector('input[name="prefill_subject"]')?.value || '';
-    var message = document.querySelector('input[name="prefill_message"]')?.value || '';
+    var data = getPrefillData();
+    var subject = data.subject || '';
+    var message = data.message || '';
     var dynForm = document.getElementById('dynamic-form');
     if (!dynForm) return;
 
     // Force on initial/server-provided prefill so OAuth login callbacks keep the
-    // query-string/session value instead of an empty osTicket draft value.
-    var shouldForce = !!force || /[?&](subject|description)=/i.test(window.location.search);
+    // query-string/session/localStorage value instead of an empty osTicket draft value.
+    var shouldForce = !!force || /[?&](subject|description)=/i.test(window.location.search) || !!readStoredPrefill().subject;
 
     if (subject) {
-      var subjectEl = findSubjectField(dynForm);
-      protectField(subjectEl);
-      setFieldValue(subjectEl, subject, shouldForce);
+      findSubjectFields(dynForm).forEach(function(subjectEl) {
+        protectField(subjectEl);
+        setFieldValue(subjectEl, subject, shouldForce);
+      });
     }
 
     // Message: textarea inside #dynamic-form (may be richtext/Redactor)
