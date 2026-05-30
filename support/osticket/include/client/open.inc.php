@@ -307,13 +307,43 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
 <script>
 (function(){
   var PREFILL_STORAGE_KEY = 'ssy:open-prefill:v1';
+  var PREFILL_PENDING_KEY = 'ssy:open-prefill-pending:v1';
+
+  function hasExplicitPrefillParams() {
+    return /[?&](subject|description|tickettopic)=/i.test(window.location.search || '');
+  }
+
+  function markPendingPrefill() {
+    try { sessionStorage.setItem(PREFILL_PENDING_KEY, String(Date.now())); } catch(e) {}
+  }
+
+  function hasPendingPrefill() {
+    try {
+      var ts = parseInt(sessionStorage.getItem(PREFILL_PENDING_KEY) || '0', 10);
+      return ts && Date.now() - ts < 10 * 60 * 1000;
+    } catch(e) { return false; }
+  }
+
+  function clearStoredPrefill() {
+    try { localStorage.removeItem(PREFILL_STORAGE_KEY); } catch(e) {}
+    try { sessionStorage.removeItem(PREFILL_PENDING_KEY); } catch(e) {}
+  }
 
   function readStoredPrefill() {
+    // Only use storage during the explicit prefill/login flow. A normal visit to
+    // /open.php must not resurrect an old support-template subject.
+    if (!hasExplicitPrefillParams() && !hasPendingPrefill()) {
+      clearStoredPrefill();
+      return {};
+    }
     try {
       var raw = window.localStorage && localStorage.getItem(PREFILL_STORAGE_KEY);
       if (!raw) return {};
       var data = JSON.parse(raw);
-      if (!data || !data.ts || Date.now() - data.ts > 60 * 60 * 1000) return {};
+      if (!data || !data.ts || Date.now() - data.ts > 60 * 60 * 1000) {
+        clearStoredPrefill();
+        return {};
+      }
       return data;
     } catch(e) { return {}; }
   }
@@ -331,6 +361,11 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
   }
 
   function getPrefillData() {
+    if (!hasExplicitPrefillParams() && !hasPendingPrefill()) {
+      clearStoredPrefill();
+      return { topic: '', subject: '', message: '' };
+    }
+
     var topic = document.querySelector('input[name="prefill_topicId"]')?.value || '';
     var subject = document.querySelector('input[name="prefill_subject"]')?.value || '';
     var message = document.querySelector('input[name="prefill_message"]')?.value || '';
@@ -338,9 +373,14 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
     subject = subject || stored.subject || '';
     message = message || stored.message || '';
     topic = topic || stored.topic || '';
-    rememberPrefill(topic, subject, message);
+    if (hasExplicitPrefillParams()) rememberPrefill(topic, subject, message);
     return { topic: topic, subject: subject, message: message };
   }
+
+  document.addEventListener('click', function(event) {
+    var link = event.target && event.target.closest && event.target.closest('a[href*="do=login"]');
+    if (link && hasExplicitPrefillParams()) markPendingPrefill();
+  }, true);
 
   function setFieldValue(el, value, force) {
     if (!el || !value) return;
@@ -426,7 +466,7 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
 
     // Force on initial/server-provided prefill so OAuth login callbacks keep the
     // query-string/session/localStorage value instead of an empty osTicket draft value.
-    var shouldForce = !!force || /[?&](subject|description)=/i.test(window.location.search) || !!readStoredPrefill().subject;
+    var shouldForce = !!force || hasExplicitPrefillParams() || hasPendingPrefill();
 
     if (subject) {
       findSubjectFields(dynForm).forEach(function(subjectEl) {
