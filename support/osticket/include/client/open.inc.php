@@ -330,9 +330,9 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
   }
 
   function readStoredPrefill() {
-    // Only use storage during the explicit prefill/login flow. A normal visit to
-    // /open.php must not resurrect an old support-template subject.
-    if (!hasExplicitPrefillParams() && !hasPendingPrefill()) {
+    // Only use storage when the current URL explicitly asks for prefill. A
+    // normal /open.php visit must never resurrect an old support-template subject.
+    if (!hasExplicitPrefillParams()) {
       clearStoredPrefill();
       return {};
     }
@@ -361,7 +361,7 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
   }
 
   function getPrefillData() {
-    if (!hasExplicitPrefillParams() && !hasPendingPrefill()) {
+    if (!hasExplicitPrefillParams()) {
       clearStoredPrefill();
       return { topic: '', subject: '', message: '' };
     }
@@ -466,7 +466,7 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
 
     // Force on initial/server-provided prefill so OAuth login callbacks keep the
     // query-string/session/localStorage value instead of an empty osTicket draft value.
-    var shouldForce = !!force || hasExplicitPrefillParams() || hasPendingPrefill();
+    var shouldForce = !!force || hasExplicitPrefillParams();
 
     if (subject) {
       findSubjectFields(dynForm).forEach(function(subjectEl) {
